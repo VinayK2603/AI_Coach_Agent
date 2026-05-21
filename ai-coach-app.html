@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Daily Coach - Career Growth & Interview Prep</title>
+    <style>
+        /* ==================== GLOBAL STYLES ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --danger: #ef4444;
+            --light: #f3f4f6;
+            --dark: #1f2937;
+            --gray: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: var(--dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* ==================== HEADER ==================== */
+        header {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2.5em;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.1em;
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 0.95em;
+            color: #9ca3af;
+        }
+
+        /* ==================== MAIN LAYOUT ==================== */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .card h2 {
+            color: var(--primary);
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h3 {
+            color: var(--dark);
+            font-size: 1.1em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* ==================== BUTTONS ==================== */
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--light);
+            color: var(--dark);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        .btn-success {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            background: #d97706;
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9em;
+        }
+
+        .btn-block {
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        /* ==================== FORMS ==================== */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .file-upload {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-label {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .file-label:hover {
+            background: var(--primary-dark);
+        }
+
+        .file-name {
+            color: var(--gray);
+            font-size: 0.9em;
+        }
+
+        /* ==================== SECTIONS ==================== */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .tab-btn {
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: var(--gray);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        /* ==================== SKILL ANALYSIS ==================== */
+        .skill-group {
+            margin-bottom: 25px;
+        }
+
+        .skill-category {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1em;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .skill-item {
+            background: var(--light);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            border-left-color: var(--primary);
+            background: #f9fafb;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .skill-score {
+            display: flex;
+            gap: 15px;
+            font-size: 0.9em;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85em;
+        }
+
+        .badge-strong {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-moderate {
+            background: #fef3c7;
+            color: #78350f;
+        }
+
+        .badge-weak {
+            background: #fee2e2;
+            color: #7f1d1d;
+        }
+
+        .confidence-score {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* ==================== PROGRESS BAR ==================== */
+        .progress-container {
+            margin: 15px 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            color: var(--gray);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        /* ==================== GAPS SECTION ==================== */
+        .gap-item {
+            background: #fef2f2;
+            border-left: 4px solid var(--danger);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .gap-skill {
+            font-weight: 700;
+            color: var(--danger);
+            margin-bottom: 5px;
+        }
+
+        .gap-description {
+            color: var(--gray);
+            font-size: 0.95em;
+            margin-bottom: 10px;
+        }
+
+        .gap-action {
+            background: white;
+            padding: 10px;
+            border-radius: 6px;
+            color: var(--dark);
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        /* ==================== DAILY TASK ==================== */
+        .task-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .task-day {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .task-title {
+            font-size: 1.5em;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .task-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .task-section-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+            opacity: 0.95;
+        }
+
+        .task-content {
+            font-size: 0.95em;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        /* ==================== STATS ==================== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--primary);
+            background: #f0f4ff;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        /* ==================== MODAL ==================== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .close-btn:hover {
+            color: var(--dark);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .logo {
+                font-size: 2em;
+            }
+
+            .section-tabs {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* ==================== HELPER CLASSES ==================== */
+        .hidden {
+            display: none;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-muted {
+            color: var(--gray);
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .alert-info {
+            background: #dbeafe;
+            color: #1e40af;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .alert-success {
+            background: #dcfce7;
+            color: #15803d;
+            border-left: 4px solid #22c55e;
+        }
+
+        .alert-warning {
+            background: #fef3c7;
+            color: #78350f;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--gray);
+        }
+
+        .empty-state-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- ==================== HEADER ==================== -->
+    <div class="container">
+        <header>
+            <div class="logo">🎓 AI Daily Coach</div>
+            <p class="tagline">Your Personal Career Growth & Interview Prep Companion</p>
+            <p class="subtitle">Analyze, Learn, Grow, Ace Interviews</p>
+        </header>
+
+        <!-- ==================== MAIN CONTENT ==================== -->
+        <!-- SECTION: ONBOARDING (Resume Upload) -->
+        <div id="onboardingSection" class="section active">
+            <div class="main-grid">
+                <div class="card">
+                    <h2>📄 Upload Your Resume</h2>
+                    <p style="color: var(--gray); margin-bottom: 20px;">Share your resume so I can analyze your skills, experience, and create a personalized learning roadmap.</p>
+                    
+                    <div class="form-group">
+                        <label>Your Resume (Text/PDF content)</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                            <button class="btn btn-secondary" onclick="document.getElementById('resumeFile').click()">📁 Upload File</button>
+                            <span style="text-align: center; color: var(--gray);">OR</span>
+                        </div>
+                        <input type="file" id="resumeFile" accept=".pdf,.doc,.docx,.txt" style="display: none;" onchange="handleResumeFileUpload(event)">
+                        <textarea id="resumeText" placeholder="Paste your resume here, or upload PDF/Word/Text file..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Your Target Role</label>
+                        <input type="text" id="targetRole" placeholder="e.g., Senior AI Engineer, ML Engineer, Full-Stack Developer">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Your Name (optional)</label>
+                        <input type="text" id="userName" placeholder="Your name">
+                    </div>
+
+                    <button class="btn btn-primary btn-block" onclick="analyzeResume()">🚀 Analyze My Resume</button>
+                </div>
+
+                <div class="card">
+                    <h2>✨ What You'll Get</h2>
+                    <ul style="line-height: 2; color: var(--gray);">
+                        <li>✅ <strong>Skill Scoring</strong> — STRONG/MODERATE/WEAK ratings</li>
+                        <li>✅ <strong>Target Role Gaps</strong> — Exactly what's missing</li>
+                        <li>✅ <strong>Experience Breakdown</strong> — By domain & level</li>
+                        <li>✅ <strong>Personalized Roadmap</strong> — 8-week learning plan</li>
+                        <li>✅ <strong>Daily Tasks</strong> — Topics + Coding challenges</li>
+                        <li>✅ <strong>Mastery Tracking</strong> — Confidence scores & progress</li>
+                        <li>✅ <strong>Mock Interviews</strong> — Technical + Behavioral prep</li>
+                        <li>✅ <strong>Weekly Reports</strong> — Your growth summary</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: ANALYSIS RESULTS -->
+        <div id="analysisSection" class="section">
+            <div class="section-tabs">
+                <button class="tab-btn active" onclick="switchTab('overview')">📊 Overview</button>
+                <button class="tab-btn" onclick="switchTab('skills')">💼 Skills</button>
+                <button class="tab-btn" onclick="switchTab('gaps')">⚠️ Gaps</button>
+                <button class="tab-btn" onclick="switchTab('roadmap')">🗺️ Roadmap</button>
+            </div>
+
+            <!-- OVERVIEW TAB -->
+            <div id="overviewTab" class="tab-content active">
+                <div class="card">
+                    <h2>👤 Profile Overview</h2>
+                    <div id="profileOverview"></div>
+                    <button class="btn btn-success mt-20" onclick="startDailyLearning()">Start Daily Learning</button>
+                </div>
+            </div>
+
+            <!-- SKILLS TAB -->
+            <div id="skillsTab" class="tab-content hidden">
+                <div class="card">
+                    <h2>💼 Your Skills</h2>
+                    <div id="skillsAnalysis"></div>
+                </div>
+            </div>
+
+            <!-- GAPS TAB -->
+            <div id="gapsTab" class="tab-content hidden">
+                <div class="card">
+                    <h2>⚠️ Critical Gaps</h2>
+                    <div id="gapsAnalysis"></div>
+                </div>
+            </div>
+
+            <!-- ROADMAP TAB -->
+            <div id="roadmapTab" class="tab-content hidden">
+                <div class="card">
+                    <h2>🗺️ 8-Week Learning Roadmap</h2>
+                    <div id="roadmapContent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: DAILY LEARNING -->
+        <div id="dailySection" class="section">
+            <div class="section-tabs">
+                <button class="tab-btn active" onclick="switchTab('task')">📚 Today's Task</button>
+                <button class="tab-btn" onclick="switchTab('progress')">📈 Progress</button>
+                <button class="tab-btn" onclick="switchTab('interview')">🎤 Mock Interview</button>
+            </div>
+
+            <!-- TASK TAB -->
+            <div id="taskTab" class="tab-content active">
+                <div class="card">
+                    <div id="dailyTaskContent"></div>
+                    <button class="btn btn-secondary mt-20" onclick="switchTab('progress')">Log Your Answer</button>
+                </div>
+            </div>
+
+            <!-- PROGRESS TAB -->
+            <div id="progressTab" class="tab-content hidden">
+                <div class="card">
+                    <h2>📈 Your Progress</h2>
+                    <div id="progressContent"></div>
+                </div>
+            </div>
+
+            <!-- INTERVIEW TAB -->
+            <div id="interviewTab" class="tab-content hidden">
+                <div class="card">
+                    <h2>🎤 Mock Interview</h2>
+                    <div id="interviewContent"></div>
+                    <button class="btn btn-accent mt-20" onclick="startMockInterview()">Start Interview</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        // ==================== STATE MANAGEMENT ====================
+        let userProfile = {
+            name: '',
+            resume: '',
+            targetRole: '',
+            skills: [],
+            gaps: [],
+            roadmap: [],
+            dailyTasks: [],
+            progress: [],
+            currentDay: 1
+        };
+
+        // ==================== RESUME ANALYSIS ====================
+        function analyzeResume() {
+            const resumeText = document.getElementById('resumeText').value.trim();
+            const targetRole = document.getElementById('targetRole').value.trim();
+            const userName = document.getElementById('userName').value.trim();
+
+            if (!resumeText || !targetRole) {
+                alert('Please provide both resume text and target role');
+                return;
+            }
+
+            userProfile.resume = resumeText;
+            userProfile.targetRole = targetRole;
+            userProfile.name = userName || 'Learner';
+
+            // Parse and analyze resume
+            analyzeSkillsFromResume();
+            detectGaps();
+            generateRoadmap();
+            generateDailyTasks();
+
+            // Switch to analysis section
+            showSection('analysisSection');
+            displayAnalysis();
+        }
+
+        /**
+         * Extract and score skills from resume
+         */
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function handleResumeFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                let text = e.target.result;
+                
+                // If it's a PDF, we'd need a library. For now, show a message
+                if (file.type === 'application/pdf') {
+                    alert('PDF support requires additional library. Please copy-paste the PDF content instead, or use .txt format.');
+                    return;
+                }
+                
+                document.getElementById('resumeText').value = text;
+                document.getElementById('resumeText').focus();
+                alert('✅ Resume file loaded successfully! Click "Analyze My Resume" to proceed.');
+            };
+            
+            if (file.type === 'application/pdf') {
+                reader.readAsArrayBuffer(file);
+            } else {
+                reader.readAsText(file);
+            }
+        }
+
+        function analyzeSkillsFromResume() {
+            const skillKeywords = {
+                'Backend': ['Node.js', 'Express', 'Django', 'Flask', 'FastAPI', 'Spring', 'Java', 'Python', 'Go', 'Rust', 'C++'],
+                'Frontend': ['React', 'Vue', 'Angular', 'HTML', 'CSS', 'JavaScript', 'TypeScript', 'Next.js', 'Svelte'],
+                'AI/ML': ['TensorFlow', 'PyTorch', 'scikit-learn', 'NLP', 'LLM', 'Transformers', 'RAG', 'Deep Learning', 'Machine Learning', 'Neural Networks'],
+                'Data': ['SQL', 'PostgreSQL', 'MongoDB', 'Redis', 'Elasticsearch', 'Data Pipeline', 'ETL', 'Big Data', 'Spark'],
+                'Cloud': ['AWS', 'GCP', 'Azure', 'Docker', 'Kubernetes', 'CloudFormation', 'Lambda', 'EC2'],
+                'DevOps': ['Docker', 'Kubernetes', 'CI/CD', 'Jenkins', 'GitLab', 'GitHub Actions', 'Terraform', 'Infrastructure as Code'],
+                'System Design': ['Microservices', 'Scalability', 'Distributed Systems', 'System Architecture', 'Design Patterns']
+            };
+
+            userProfile.skills = [];
+
+            Object.entries(skillKeywords).forEach(([domain, keywords]) => {
+                const foundSkills = [];
+                keywords.forEach(skill => {
+                    const regex = new RegExp(escapeRegExp(skill), 'gi');
+                    if (regex.test(userProfile.resume)) {
+                        foundSkills.push(skill);
+                    }
+                });
+
+                if (foundSkills.length > 0) {
+                    foundSkills.forEach(skill => {
+                        const mentions = (userProfile.resume.match(new RegExp(escapeRegExp(skill), 'gi')) || []).length;
+                        let score = 'WEAK';
+                        if (mentions >= 3) score = 'STRONG';
+                        else if (mentions >= 2) score = 'MODERATE';
+
+                        userProfile.skills.push({
+                            name: skill,
+                            domain: domain,
+                            score: score,
+                            confidence: score === 'STRONG' ? 75 : score === 'MODERATE' ? 55 : 35,
+                            mentions: mentions
+                        });
+                    });
+                }
+            });
+
+            // Sort by strength
+            userProfile.skills.sort((a, b) => {
+                const scoreOrder = { STRONG: 0, MODERATE: 1, WEAK: 2 };
+                return scoreOrder[a.score] - scoreOrder[b.score];
+            });
+        }
+
+        /**
+         * Detect gaps between current skills and target role
+         */
+        function detectGaps() {
+            const targetRoleSkills = {
+                'Senior AI Engineer': ['LLM', 'RAG', 'Vector Databases', 'System Design', 'Distributed Systems', 'PyTorch', 'TensorFlow'],
+                'ML Engineer': ['Machine Learning', 'Data Pipeline', 'Python', 'SQL', 'Statistics'],
+                'Full-Stack Developer': ['React', 'Node.js', 'SQL', 'Docker', 'System Design'],
+                'Data Scientist': ['Python', 'SQL', 'Statistics', 'Machine Learning', 'Data Visualization'],
+                'DevOps Engineer': ['Kubernetes', 'Docker', 'CI/CD', 'AWS', 'Infrastructure as Code']
+            };
+
+            const targetSkills = targetRoleSkills[userProfile.targetRole] || [];
+            const currentSkillNames = userProfile.skills.map(s => s.name.toLowerCase());
+
+            userProfile.gaps = [];
+            targetSkills.forEach(skill => {
+                const found = userProfile.skills.find(s => s.name.toLowerCase() === skill.toLowerCase());
+                if (!found) {
+                    userProfile.gaps.push({
+                        skill: skill,
+                        why: `Essential for ${userProfile.targetRole}`,
+                        how: `Learn through projects and daily coding challenges`
+                    });
+                }
+            });
+        }
+
+        /**
+         * Generate personalized learning roadmap
+         */
+        function generateRoadmap() {
+            userProfile.roadmap = [
+                { week: 1, theme: 'Fundamentals', topics: ['Data Structures', 'Algorithm Basics', 'Python Essentials'] },
+                { week: 2, theme: 'Advanced Data Structures', topics: ['Trees & Graphs', 'Hashing', 'Dynamic Programming'] },
+                { week: 3, theme: 'System Design', topics: ['Scalability', 'Database Design', 'Caching'] },
+                { week: 4, theme: 'Distributed Systems', topics: ['Microservices', 'Load Balancing', 'Consensus Algorithms'] },
+                { week: 5, theme: 'AI/ML Foundations', topics: ['Linear Algebra for ML', 'Neural Networks', 'Deep Learning'] },
+                { week: 6, theme: 'LLMs & RAG', topics: ['Transformers', 'Vector Databases', 'Prompt Engineering'] },
+                { week: 7, theme: 'Production ML', topics: ['Model Deployment', 'Monitoring', 'A/B Testing'] },
+                { week: 8, theme: 'Interview Prep', topics: ['Mock Interviews', 'Behavioral Prep', 'System Design Practice'] }
+            ];
+        }
+
+        /**
+         * Generate daily learning tasks
+         */
+        function generateDailyTasks() {
+            userProfile.dailyTasks = [
+                {
+                    day: 1,
+                    week: 1,
+                    topic: 'Big O Notation & Time Complexity',
+                    concept: 'Understand how to measure algorithm efficiency using Big O, Big Theta, and Big Omega.',
+                    whyMatters: 'Critical for optimizing code and acing technical interviews',
+                    difficulty: 'Easy',
+                    time: 45,
+                    question: 'Analyze the time and space complexity of bubble sort. Write pseudocode for O(n log n) sorting.',
+                    codingChallenge: 'Implement merge sort and explain its time complexity'
+                },
+                {
+                    day: 2,
+                    week: 1,
+                    topic: 'Arrays & Linked Lists',
+                    concept: 'Master operations on arrays and linked lists (insert, delete, search).',
+                    whyMatters: 'Fundamental data structures used in 80% of coding interviews',
+                    difficulty: 'Medium',
+                    time: 60,
+                    question: 'Remove duplicates from a sorted array in-place. What\'s the optimal approach?',
+                    codingChallenge: 'LeetCode: Remove Duplicates from Sorted Array II'
+                },
+                {
+                    day: 3,
+                    week: 1,
+                    topic: 'Hash Maps & Hash Tables',
+                    concept: 'Understand hashing, collisions, and hash map implementation.',
+                    whyMatters: 'Used to optimize problems from O(n²) to O(n)',
+                    difficulty: 'Medium',
+                    time: 50,
+                    question: 'Design a HashSet from scratch. Implement add, remove, and contains.',
+                    codingChallenge: 'Two Sum Problem - solve using hash map'
+                }
+            ];
+        }
+
+        /**
+         * Display analysis results
+         */
+        function displayAnalysis() {
+            displayProfileOverview();
+            displaySkillsAnalysis();
+            displayGapsAnalysis();
+            displayRoadmap();
+        }
+
+        function displayProfileOverview() {
+            const strongSkills = userProfile.skills.filter(s => s.score === 'STRONG').length;
+            const moderateSkills = userProfile.skills.filter(s => s.score === 'MODERATE').length;
+            const weakSkills = userProfile.skills.filter(s => s.score === 'WEAK').length;
+
+            const html = `
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">${userProfile.skills.length}</div>
+                        <div class="stat-label">Total Skills</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${strongSkills}</div>
+                        <div class="stat-label">Strong Skills</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${userProfile.gaps.length}</div>
+                        <div class="stat-label">Skill Gaps</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">8</div>
+                        <div class="stat-label">Week Roadmap</div>
+                    </div>
+                </div>
+
+                <div style="background: #f0f4ff; padding: 20px; border-radius: 8px; border-left: 4px solid var(--primary);">
+                    <h3 style="color: var(--primary); margin-bottom: 10px;">Current Level Assessment</h3>
+                    <p style="color: var(--gray); margin-bottom: 15px;">
+                        Based on your resume, you're at a <strong>Mid-Level</strong> with strong fundamentals in ${userProfile.skills.slice(0, 3).map(s => s.name).join(', ')}.
+                    </p>
+                    <p style="color: var(--gray);">
+                        To reach <strong>${userProfile.targetRole}</strong>, focus on: ${userProfile.gaps.slice(0, 3).map(g => g.skill).join(', ')}.
+                    </p>
+                </div>
+            `;
+            document.getElementById('profileOverview').innerHTML = html;
+        }
+
+        function displaySkillsAnalysis() {
+            let html = '';
+            const domains = {};
+
+            userProfile.skills.forEach(skill => {
+                if (!domains[skill.domain]) {
+                    domains[skill.domain] = [];
+                }
+                domains[skill.domain].push(skill);
+            });
+
+            Object.entries(domains).forEach(([domain, skills]) => {
+                html += `
+                    <div class="skill-group">
+                        <div class="skill-category">${domain}</div>
+                        ${skills.map(skill => `
+                            <div class="skill-item">
+                                <div class="skill-name">${skill.name}</div>
+                                <div class="skill-score">
+                                    <span class="badge badge-${skill.score.toLowerCase()}">${skill.score}</span>
+                                    <span class="confidence-score">Confidence: ${skill.confidence}%</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+
+            document.getElementById('skillsAnalysis').innerHTML = html;
+        }
+
+        function displayGapsAnalysis() {
+            if (userProfile.gaps.length === 0) {
+                document.getElementById('gapsAnalysis').innerHTML = '<p style="text-align: center; color: var(--gray);">No major gaps detected! You\'re well-prepared for your target role.</p>';
+                return;
+            }
+
+            const html = userProfile.gaps.map(gap => `
+                <div class="gap-item">
+                    <div class="gap-skill">📍 ${gap.skill}</div>
+                    <div class="gap-description">${gap.why}</div>
+                    <div class="gap-action">💡 ${gap.how}</div>
+                </div>
+            `).join('');
+
+            document.getElementById('gapsAnalysis').innerHTML = html;
+        }
+
+        function displayRoadmap() {
+            const html = userProfile.roadmap.map(item => `
+                <div style="margin-bottom: 20px; padding: 15px; background: var(--light); border-radius: 8px; border-left: 4px solid var(--primary);">
+                    <div style="font-weight: 700; color: var(--primary); margin-bottom: 8px;">Week ${item.week} - ${item.theme}</div>
+                    <div style="color: var(--gray); font-size: 0.95em;">
+                        ${item.topics.join(' → ')}
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('roadmapContent').innerHTML = html;
+        }
+
+        /**
+         * Switch sections
+         */
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        /**
+         * Switch tabs within section
+         */
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(tabName + 'Tab').classList.remove('hidden');
+            event.target.classList.add('active');
+        }
+
+        /**
+         * Start daily learning
+         */
+        function startDailyLearning() {
+            generateDailyTaskDisplay();
+            generateProgressDisplay();
+            showSection('dailySection');
+        }
+
+        function generateDailyTaskDisplay() {
+            const task = userProfile.dailyTasks[0];
+            const html = `
+                <div class="task-card">
+                    <div class="task-day">📅 Day ${task.day} - Week ${task.week}</div>
+                    <div class="task-title">📚 ${task.topic}</div>
+
+                    <div class="task-section">
+                        <div class="task-section-title">🧠 Today's Concept</div>
+                        <div class="task-content">${task.concept}</div>
+                    </div>
+
+                    <div class="task-section">
+                        <div class="task-section-title">⭐ Why It Matters</div>
+                        <div class="task-content">${task.whyMatters}</div>
+                    </div>
+
+                    <div class="task-section">
+                        <div class="task-section-title">💻 Coding Challenge</div>
+                        <div style="margin-bottom: 10px;">
+                            <span class="difficulty-badge">${task.difficulty}</span>
+                            <span class="difficulty-badge" style="margin-left: 10px;">⏱️ ~${task.time} mins</span>
+                        </div>
+                        <div class="task-content">${task.codingChallenge}</div>
+                    </div>
+
+                    <div class="task-section">
+                        <div class="task-section-title">✅ After Solving</div>
+                        <div class="task-content">Explain your approach in your own words. What's the time/space complexity? Any edge cases?</div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('dailyTaskContent').innerHTML = html;
+        }
+
+        function generateProgressDisplay() {
+            const html = `
+                <h3>Your Mastery Map</h3>
+                <div style="margin-bottom: 25px;">
+                    <div style="font-weight: 600; margin-bottom: 10px;">Big O Notation</div>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Confidence Score</span>
+                            <span>65%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;">
+                    <div class="stat-card">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">Day Streak</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">0/10</div>
+                        <div class="stat-label">Problems Solved</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">0%</div>
+                        <div class="stat-label">Accuracy</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">Topics Weak</div>
+                    </div>
+                </div>
+
+                <div class="alert alert-info" style="margin-top: 20px;">
+                    <strong>💡 Tip:</strong> Solve today's challenge, explain your approach, and come back tomorrow for the next one. Consistency builds mastery!
+                </div>
+            `;
+            document.getElementById('progressContent').innerHTML = html;
+        }
+
+        /**
+         * Start mock interview
+         */
+        function startMockInterview() {
+            const html = `
+                <div class="alert alert-info">
+                    <strong>🎤 Ready?</strong> I'll ask you a technical or behavioral question and give detailed feedback.
+                </div>
+
+                <div style="margin: 20px 0; padding: 20px; background: var(--light); border-radius: 8px; border-left: 4px solid var(--accent);">
+                    <div style="font-weight: 700; color: var(--dark); margin-bottom: 10px;">Technical Question 1/3</div>
+                    <div style="color: var(--gray); font-size: 0.95em; line-height: 1.6;">
+                        "Design a distributed cache system that can handle millions of requests per second. Consider consistency, availability, and partition tolerance (CAP theorem)."
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Your Answer</label>
+                    <textarea id="interviewAnswer" placeholder="Write your answer here... Explain your approach, trade-offs, and how you'd handle edge cases."></textarea>
+                </div>
+
+                <button class="btn btn-accent" onclick="submitInterviewAnswer()">Submit Answer & Get Feedback</button>
+            `;
+            document.getElementById('interviewContent').innerHTML = html;
+        }
+
+        function submitInterviewAnswer() {
+            const answer = document.getElementById('interviewAnswer').value;
+            if (!answer.trim()) {
+                alert('Please provide an answer');
+                return;
+            }
+
+            // Analyze answer quality based on keywords and length
+            const qualityScore = analyzeAnswerQuality(answer, userProfile.currentQuestion);
+            
+            let feedbackHtml = '';
+            
+            if (qualityScore.score < 30) {
+                feedbackHtml = `
+                    <div class="alert alert-danger" style="margin-bottom: 20px;">
+                        <strong>⚠️ Needs More Detail</strong>
+                    </div>
+                    <div style="margin-bottom: 20px; padding: 15px; background: #fee2e2; border-radius: 8px;">
+                        <div style="font-weight: 700; color: #991b1b; margin-bottom: 10px;">Feedback:</div>
+                        <p style="color: #991b1b; margin-bottom: 10px;">${qualityScore.feedback}</p>
+                        <p style="color: #991b1b;"><strong>Suggestions:</strong> ${qualityScore.suggestions}</p>
+                    </div>
+                `;
+            } else if (qualityScore.score < 60) {
+                feedbackHtml = `
+                    <div class="alert alert-warning" style="margin-bottom: 20px;">
+                        <strong>✓ Good Start</strong> - Room for improvement
+                    </div>
+                    <div style="margin-bottom: 20px; padding: 15px; background: #fef3c7; border-radius: 8px;">
+                        <div style="font-weight: 700; color: #78350f; margin-bottom: 10px;">What Was Good:</div>
+                        <p style="color: #78350f; margin-bottom: 10px;">${qualityScore.strengths}</p>
+                        <div style="font-weight: 700; color: #78350f; margin-bottom: 10px; margin-top: 15px;">Areas to Enhance:</div>
+                        <p style="color: #78350f;">${qualityScore.suggestions}</p>
+                    </div>
+                `;
+            } else {
+                feedbackHtml = `
+                    <div class="alert alert-success" style="margin-bottom: 20px;">
+                        <strong>✅ Excellent Answer!</strong>
+                    </div>
+                    <div style="margin-bottom: 20px; padding: 15px; background: #d1fae5; border-radius: 8px;">
+                        <div style="font-weight: 700; color: #065f46; margin-bottom: 10px;">Why This Answer Works:</div>
+                        <p style="color: #065f46; margin-bottom: 10px;">${qualityScore.strengths}</p>
+                        <div style="font-weight: 700; color: #065f46; margin-bottom: 10px; margin-top: 15px;">Key Points Covered:</div>
+                        <ul style="color: #065f46; margin-left: 20px;">${qualityScore.keyPoints}</ul>
+                    </div>
+                `;
+            }
+            
+            feedbackHtml += `
+                <div style="margin-top: 20px; padding: 15px; background: #f0f9ff; border-radius: 8px; border-left: 4px solid #3b82f6;">
+                    <div style="font-weight: 700; color: #1e40af; margin-bottom: 10px;">📊 Score: ${qualityScore.score}/100</div>
+                </div>
+                <button class="btn btn-secondary mt-20" onclick="startMockInterview()">Next Question</button>
+            `;
+            
+            document.getElementById('interviewContent').innerHTML = feedbackHtml;
+        }
+
+        function analyzeAnswerQuality(answer, question) {
+            const answerLower = answer.toLowerCase();
+            const answerLength = answer.trim().split(/\s+/).length;
+            let score = 0;
+            let strengths = '';
+            let suggestions = '';
+            let keyPoints = '';
+            let feedback = '';
+
+            // Check minimum length
+            if (answerLength < 10) {
+                feedback = 'Your answer is too brief. Try to provide more detail and context.';
+                suggestions = 'Aim for at least 3-4 sentences with specific examples.';
+                return { score: 15, feedback, suggestions, strengths: 'You provided a response, but more elaboration is needed.' };
+            }
+
+            // Analyze based on question type
+            if (question && question.includes('design')) {
+                // System Design Question
+                const designKeywords = ['scale', 'database', 'cache', 'load', 'distributed', 'api', 'microservice', 'latency', 'throughput'];
+                const keywordMatches = designKeywords.filter(kw => answerLower.includes(kw)).length;
+                
+                score = Math.min(30 + (keywordMatches * 8), 95);
+                strengths = keywordMatches >= 5 ? 'Comprehensive system design thinking with multiple considerations.' : 'Basic system design approach identified.';
+                suggestions = keywordMatches < 5 ? 'Consider discussing: caching strategies, database optimization, load balancing, and scalability patterns.' : 'Add more specifics about monitoring, failover, and disaster recovery.';
+                keyPoints = designKeywords.filter(kw => answerLower.includes(kw)).map(kw => `<li>Mentioned ${kw}</li>`).join('');
+            } else if (question && question.includes('code') || question.includes('implement')) {
+                // Coding Question
+                const codeKeywords = ['function', 'class', 'method', 'algorithm', 'logic', 'variable', 'loop', 'condition'];
+                const codeMatches = codeKeywords.filter(kw => answerLower.includes(kw)).length;
+                const hasCodeStructure = /[{\[\(]/.test(answer); // Check for code-like syntax
+                
+                score = 20 + (codeMatches * 8) + (hasCodeStructure ? 15 : 0);
+                strengths = hasCodeStructure ? 'Code structure identified with proper syntax.' : 'Logical explanation provided.';
+                suggestions = !hasCodeStructure ? 'Try to provide actual code or pseudocode for better clarity.' : 'Add comments explaining your algorithm.';
+                keyPoints = '<li>Programming concepts identified</li><li>Logic demonstrated</li>';
+            } else {
+                // Behavioral/General Question  
+                const behavioralKeywords = ['situation', 'task', 'action', 'result', 'learned', 'example', 'specific', 'challenge', 'overcome', 'improved'];
+                const behaviorMatches = behavioralKeywords.filter(kw => answerLower.includes(kw)).length;
+                
+                score = 25 + (behaviorMatches * 8) + (answerLength > 50 ? 10 : 0);
+                strengths = behaviorMatches >= 5 ? 'STAR method applied effectively with clear examples.' : 'General approach with some specific details.';
+                suggestions = behaviorMatches < 5 ? 'Use STAR method: Situation → Task → Action → Result. This makes answers more compelling.' : 'Add more quantifiable results to demonstrate impact.';
+                keyPoints = behavioralKeywords.filter(kw => answerLower.includes(kw)).map(kw => `<li>Included: ${kw}</li>`).join('');
+            }
+
+            return {
+                score: Math.max(15, Math.min(100, score)),
+                feedback,
+                suggestions,
+                strengths,
+                keyPoints: keyPoints || '<li>Response provided and analyzed</li>'
+            };
+        }
+    </script>
+</body>
+</html>
