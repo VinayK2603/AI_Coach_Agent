@@ -1,0 +1,25 @@
+{
+  "name": "ai_coach_agent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VinayK2603/AI_Coach_Agent.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/VinayK2603/AI_Coach_Agent/issues"
+  },
+  "homepage": "https://github.com/VinayK2603/AI_Coach_Agent#readme",
+  "dependencies": {
+    "playwright": "^1.60.0",
+    "playwright-chromium": "^1.60.0"
+  }
+}

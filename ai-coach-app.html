@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Daily Coach - Career Growth & Interview Prep</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/editor/editor.main.css">
     <style>
         /* ==================== GLOBAL STYLES ==================== */
         * {
@@ -611,6 +612,200 @@
             font-size: 3em;
             margin-bottom: 15px;
         }
+
+        /* ==================== CODE EDITOR ==================== */
+        .editor-back-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            background: white;
+            border-radius: 12px 12px 0 0;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 0;
+        }
+        .btn-dashboard {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 18px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.92em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-dashboard:hover { background: var(--primary-dark); }
+        .editor-wrapper {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .editor-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            background: #1e1e1e;
+            color: white;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .editor-title {
+            font-size: 1.15em;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .editor-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .editor-controls select {
+            background: #2d2d2d;
+            color: #d4d4d4;
+            border: 1px solid #555;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .btn-sm {
+            padding: 6px 14px !important;
+            font-size: 0.85em !important;
+        }
+
+        .btn-run {
+            background: #22c55e !important;
+            color: white !important;
+            border-color: #16a34a !important;
+        }
+
+        .btn-run:hover {
+            background: #16a34a !important;
+        }
+
+        .problem-panel {
+            background: #f0f9ff;
+            border-bottom: 1px solid #bae6fd;
+            padding: 14px 20px;
+        }
+
+        .problem-panel-title {
+            font-weight: 700;
+            color: #0369a1;
+            margin-bottom: 6px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .problem-panel-text {
+            color: var(--dark);
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        #monacoContainer {
+            height: 420px;
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+        }
+
+        .output-panel {
+            border-top: 2px solid #374151;
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 20px;
+            background: #2d2d2d;
+            color: #d4d4d4;
+            font-weight: 600;
+            font-size: 0.88em;
+        }
+
+        .btn-clear-output {
+            background: transparent;
+            border: 1px solid #555;
+            color: #aaa;
+            padding: 3px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+
+        .btn-clear-output:hover {
+            background: #444;
+        }
+
+        .output-area {
+            min-height: 130px;
+            max-height: 220px;
+            overflow-y: auto;
+            padding: 14px 20px;
+            color: #89d185;
+            font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+            font-size: 0.88em;
+            white-space: pre-wrap;
+            word-break: break-word;
+            background: #1e1e1e;
+            margin: 0;
+        }
+
+        .output-area.output-error {
+            color: #f48771;
+        }
+
+        .output-area.output-info {
+            color: #9cdcfe;
+        }
+
+        /* ==================== FILE UPLOAD INFO ==================== */
+        .file-info-card {
+            margin-top: 12px; padding: 14px 16px;
+            background: #d1fae5; border: 1.5px solid #6ee7b7; border-radius: 8px;
+            font-size: 0.9em; line-height: 1.6;
+        }
+        .file-info-card.error { background: #fee2e2; border-color: #fca5a5; }
+
+        /* ==================== INTERVIEW ==================== */
+        .interview-q-card {
+            background: var(--light); border-left: 4px solid var(--accent);
+            border-radius: 8px; padding: 18px 20px; margin: 16px 0;
+        }
+        .interview-meta { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.78em; font-weight: 700; }
+        .badge-category { background: #e0e7ff; color: #3730a3; }
+        .badge-easy { background: #d1fae5; color: #065f46; }
+        .badge-medium { background: #fef3c7; color: #78350f; }
+        .badge-hard { background: #fee2e2; color: #991b1b; }
+        .badge-qnum { background: #f3f4f6; color: #374151; }
+        .concept-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+        .concept-tag { padding: 4px 11px; border-radius: 20px; font-size: 0.8em; font-weight: 600; }
+        .concept-hit { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+        .concept-miss-req { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        .concept-miss-opt { background: #f3f4f6; color: #6b7280; border: 1px solid #e5e7eb; }
+        .score-bar-wrap { background: #e5e7eb; border-radius: 20px; height: 10px; margin: 8px 0 4px; }
+        .score-bar-fill { height: 10px; border-radius: 20px; transition: width 0.6s ease; }
+        .ideal-answer-block {
+            background: #f0f9ff; border: 1px solid #bae6fd;
+            border-radius: 8px; padding: 14px 16px; margin-top: 14px;
+        }
+        .ideal-answer-block summary { font-weight: 700; color: #0369a1; cursor: pointer; user-select: none; }
+        .ideal-answer-block p { color: #0c4a6e; margin-top: 10px; line-height: 1.75; font-size: 0.93em; }
     </style>
 </head>
 <body>
@@ -638,6 +833,7 @@
                         </div>
                         <input type="file" id="resumeFile" accept=".pdf,.doc,.docx,.txt" style="display: none;" onchange="handleResumeFileUpload(event)">
                         <textarea id="resumeText" placeholder="Paste your resume here, or upload PDF/Word/Text file..."></textarea>
+                        <div id="fileUploadInfo" class="file-info-card" style="display:none;"><div id="fileInfoContent"></div></div>
                     </div>
 
                     <div class="form-group">
@@ -651,6 +847,7 @@
                     </div>
 
                     <button class="btn btn-primary btn-block" onclick="analyzeResume()">🚀 Analyze My Resume</button>
+                    <button class="btn btn-secondary btn-block" style="margin-top:10px;" onclick="loadDemo()">⚡ Quick Demo (Skip Onboarding)</button>
                 </div>
 
                 <div class="card">
@@ -712,20 +909,91 @@
             </div>
         </div>
 
+        <!-- SECTION: CODE EDITOR -->
+        <div id="codeEditorSection" class="section">
+            <div class="editor-back-bar">
+                <button class="btn-dashboard" onclick="goBackFromEditor()">🏠 Back to Dashboard</button>
+                <span style="color:var(--gray);font-size:0.88em;">Code Editor — JavaScript &amp; Python run live in the browser</span>
+            </div>
+            <div class="editor-wrapper" style="border-radius:0 0 12px 12px;">
+                <div class="editor-header">
+                    <div class="editor-title">💻 Code Editor</div>
+                    <div class="editor-controls">
+                        <select id="languageSelect" onchange="changeLanguage(this.value)">
+                            <option value="javascript">JavaScript</option>
+                            <option value="python">Python</option>
+                            <option value="java">Java</option>
+                            <option value="cpp">C++</option>
+                            <option value="typescript">TypeScript</option>
+                        </select>
+                        <button class="btn btn-secondary btn-sm" onclick="resetCode()">↺ Reset</button>
+                        <button class="btn btn-secondary btn-sm" onclick="copyCode(event)">⎘ Copy</button>
+                        <button class="btn btn-secondary btn-run btn-sm" onclick="runCode()">▶ Run</button>
+                    </div>
+                </div>
+                <div class="problem-panel">
+                    <div class="problem-panel-title">📋 Problem</div>
+                    <div id="editorProblemText" class="problem-panel-text">No challenge loaded. Go to <strong>Today's Task</strong> and click <em>"Open in Code Editor"</em> to load the challenge here.</div>
+                </div>
+                <div id="monacoContainer"></div>
+                <div class="output-panel">
+                    <div class="output-header">
+                        <span>▶ Output</span>
+                        <button class="btn-clear-output" onclick="clearOutput()">Clear</button>
+                    </div>
+                    <pre id="outputArea" class="output-area output-info">// Click "▶ Run" to execute your JavaScript code...</pre>
+                </div>
+            </div>
+            <iframe id="codeSandbox" style="display:none;" sandbox="allow-scripts"></iframe>
+        </div>
+
         <!-- SECTION: DAILY LEARNING -->
         <div id="dailySection" class="section">
             <div class="section-tabs">
                 <button class="tab-btn active" onclick="switchTab('task')">📚 Today's Task</button>
                 <button class="tab-btn" onclick="switchTab('progress')">📈 Progress</button>
                 <button class="tab-btn" onclick="switchTab('interview')">🎤 Mock Interview</button>
+                <button class="tab-btn" onclick="openCodeEditor()">💻 Code Editor</button>
             </div>
 
             <!-- TASK TAB -->
             <div id="taskTab" class="tab-content active">
                 <div class="card">
                     <div id="dailyTaskContent"></div>
-                    <button class="btn btn-secondary mt-20" onclick="switchTab('progress')">Log Your Answer</button>
                 </div>
+
+                <!-- INLINE CODE EDITOR PANEL -->
+                <div id="inlineCodingPanel" style="display:none; margin-top:20px; border-radius:12px; overflow:hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <!-- Editor Header -->
+                    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:#1e1e1e;color:white;flex-wrap:wrap;gap:8px;">
+                        <span style="font-weight:700;font-size:1em;">💻 Code Editor</span>
+                        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                            <select id="inlineLangSelect" onchange="changeInlineLanguage(this.value)" style="background:#2d2d2d;color:#d4d4d4;border:1px solid #555;padding:5px 10px;border-radius:6px;font-size:0.85em;cursor:pointer;">
+                                <option value="javascript">JavaScript</option>
+                                <option value="python">Python</option>
+                                <option value="java">Java</option>
+                                <option value="cpp">C++</option>
+                                <option value="typescript">TypeScript</option>
+                            </select>
+                            <button onclick="resetInlineCode()" style="background:#2d2d2d;color:#d4d4d4;border:1px solid #555;padding:5px 12px;border-radius:6px;font-size:0.83em;cursor:pointer;">↺ Reset</button>
+                            <button onclick="runInlineCode()" style="background:#22c55e;color:white;border:none;padding:6px 14px;border-radius:6px;font-size:0.85em;font-weight:700;cursor:pointer;">▶ Run</button>
+                            <button onclick="closeInlineEditor()" style="background:transparent;color:#9ca3af;border:1px solid #555;padding:5px 12px;border-radius:6px;font-size:0.83em;cursor:pointer;">✕ Close</button>
+                        </div>
+                    </div>
+                    <!-- Problem Description -->
+                    <div id="inlineProblemPanel" style="background:#f0f9ff;padding:16px 20px;border-bottom:1px solid #bae6fd;max-height:320px;overflow-y:auto;"></div>
+                    <!-- Monaco -->
+                    <div id="inlineMonacoContainer" style="height:380px;"></div>
+                    <!-- Output -->
+                    <div style="border-top:2px solid #374151;">
+                        <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 18px;background:#2d2d2d;color:#d4d4d4;font-weight:600;font-size:0.87em;">
+                            <span>▶ Output</span>
+                            <button onclick="document.getElementById('inlineOutputArea').textContent='// Click ▶ Run to execute...';document.getElementById('inlineOutputArea').style.color='#9cdcfe';" style="background:transparent;border:1px solid #555;color:#aaa;padding:3px 10px;border-radius:4px;cursor:pointer;font-size:0.8em;">Clear</button>
+                        </div>
+                        <pre id="inlineOutputArea" style="min-height:90px;max-height:200px;overflow-y:auto;padding:12px 18px;color:#9cdcfe;font-family:'Cascadia Code',Consolas,monospace;font-size:0.87em;white-space:pre-wrap;word-break:break-word;background:#1e1e1e;margin:0;">// Click "▶ Run" to execute your code...</pre>
+                    </div>
+                </div>
+                <iframe id="inlineSandbox" style="display:none;" sandbox="allow-scripts"></iframe>
             </div>
 
             <!-- PROGRESS TAB -->
@@ -740,8 +1008,12 @@
             <div id="interviewTab" class="tab-content hidden">
                 <div class="card">
                     <h2>🎤 Mock Interview</h2>
-                    <div id="interviewContent"></div>
-                    <button class="btn btn-accent mt-20" onclick="startMockInterview()">Start Interview</button>
+                    <div id="interviewContent">
+                        <div style="text-align:center; padding:30px 0;">
+                            <p style="color:var(--gray); margin-bottom:20px; line-height:1.7;">8 questions across System Design, Algorithms, OOP, Behavioral &amp; more.<br>Each answer is scored on key concepts and compared to an ideal answer.</p>
+                            <button class="btn btn-accent" onclick="startMockInterview()">🎤 Start Mock Interview</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -795,30 +1067,148 @@
             return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         }
 
+        // Lazy-load PDF.js for PDF text extraction
+        let _pdfJsPromise = null;
+        function _loadPdfJs() {
+            if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+            if (_pdfJsPromise) return _pdfJsPromise;
+            _pdfJsPromise = new Promise((resolve, reject) => {
+                const s = document.createElement('script');
+                s.src = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js';
+                s.onload = () => {
+                    const lib = window.pdfjsLib;
+                    if (!lib) { reject(new Error('PDF.js did not expose pdfjsLib')); return; }
+                    lib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+                    resolve(lib);
+                };
+                s.onerror = () => reject(new Error('Failed to load PDF.js'));
+                document.head.appendChild(s);
+            });
+            return _pdfJsPromise;
+        }
+
+        // Lazy-load mammoth.js for DOCX parsing
+        let _mammothPromise = null;
+        function _loadMammoth() {
+            if (window.mammoth) return Promise.resolve(window.mammoth);
+            if (_mammothPromise) return _mammothPromise;
+            _mammothPromise = new Promise((resolve, reject) => {
+                const s = document.createElement('script');
+                s.src = 'https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js';
+                s.onload = () => resolve(window.mammoth);
+                s.onerror = () => reject(new Error('Failed to load Word parser'));
+                document.head.appendChild(s);
+            });
+            return _mammothPromise;
+        }
+
+        function _detectResumeRole(text) {
+            const t = text.toLowerCase();
+            const domains = {
+                'Backend Engineer':     ['node.js','express','django','flask','fastapi','spring','java','python','go','rust','c++','ruby','laravel'],
+                'Frontend Engineer':    ['react','vue','angular','html','css','javascript','typescript','next.js','svelte','tailwind','webpack'],
+                'AI / ML Engineer':     ['tensorflow','pytorch','scikit-learn','nlp','llm','transformers','rag','deep learning','machine learning','neural network','hugging face'],
+                'Data Engineer':        ['sql','postgresql','mongodb','spark','etl','data pipeline','big data','kafka','airflow','databricks','snowflake'],
+                'Cloud / DevOps':       ['aws','gcp','azure','docker','kubernetes','terraform','ci/cd','github actions','jenkins','ansible','cloudformation'],
+                'Full-Stack Engineer':  ['react','node.js','rest api','mongodb','postgresql','docker'],
+            };
+            const scores = {};
+            Object.entries(domains).forEach(([role, kws]) => {
+                scores[role] = kws.filter(kw => t.includes(kw)).length;
+            });
+            const sorted = Object.entries(scores).filter(([,v]) => v > 0).sort(([,a],[,b]) => b - a);
+            if (!sorted.length) return null;
+            // top 2 roles if close scores
+            const top = sorted.slice(0, sorted.length > 1 && sorted[1][1] >= sorted[0][1] * 0.7 ? 2 : 1);
+            return top.map(([r]) => r).join(' · ');
+        }
+
+        function _onResumeTextLoaded(text, file, infoBox, infoContent) {
+            const clean = (text || '').replace(/\s+/g, ' ').trim();
+            if (clean.length < 30) {
+                infoBox.className = 'file-info-card error';
+                infoContent.innerHTML = `<strong>⚠️ ${file.name}</strong> — Could not extract readable text. Please copy-paste your resume content manually.`;
+                return;
+            }
+            document.getElementById('resumeText').value = text;
+            const sizeKb = (file.size / 1024).toFixed(1);
+            const wordCount = clean.split(' ').length;
+            const preview = clean.substring(0, 200);
+            const detectedRole = _detectResumeRole(text);
+            infoBox.className = 'file-info-card';
+            infoContent.innerHTML = `
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+                    <strong style="color:#065f46;">✅ ${file.name}</strong>
+                    <span style="color:#6b7280;font-size:0.83em;">(${sizeKb} KB · ${wordCount} words)</span>
+                </div>
+                ${detectedRole ? `
+                <div style="margin-bottom:8px;">
+                    <span style="font-size:0.82em;color:#6b7280;">Resume suggests you are a:</span><br>
+                    <span style="background:#e0e7ff;color:#3730a3;padding:4px 12px;border-radius:20px;font-size:0.88em;font-weight:700;display:inline-block;margin-top:4px;">🎯 ${detectedRole}</span>
+                </div>` : ''}
+                <div style="color:#374151;font-size:0.84em;font-style:italic;border-left:3px solid #6ee7b7;padding-left:10px;margin-bottom:8px;">"${preview}${clean.length > 200 ? '…' : ''}"</div>
+                <div style="color:#065f46;font-size:0.84em;">Resume loaded. Now fill in your <strong>Target Role</strong> and click <strong>Analyze My Resume</strong>.</div>
+            `;
+        }
+
         function handleResumeFileUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
+            const infoBox = document.getElementById('fileUploadInfo');
+            const infoContent = document.getElementById('fileInfoContent');
+            infoBox.style.display = 'block';
+            infoBox.className = 'file-info-card';
+            infoContent.innerHTML = `<span style="color:#374151;">⏳ Reading <strong>${file.name}</strong>...</span>`;
 
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                let text = e.target.result;
-                
-                // If it's a PDF, we'd need a library. For now, show a message
-                if (file.type === 'application/pdf') {
-                    alert('PDF support requires additional library. Please copy-paste the PDF content instead, or use .txt format.');
-                    return;
-                }
-                
-                document.getElementById('resumeText').value = text;
-                document.getElementById('resumeText').focus();
-                alert('✅ Resume file loaded successfully! Click "Analyze My Resume" to proceed.');
-            };
-            
-            if (file.type === 'application/pdf') {
+            const isDocx = file.name.toLowerCase().endsWith('.docx') ||
+                           file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+            const isDoc  = file.name.toLowerCase().endsWith('.doc') ||
+                           file.type === 'application/msword';
+
+            if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    _loadPdfJs()
+                        .then(lib => lib.getDocument({ data: new Uint8Array(e.target.result) }).promise)
+                        .then(pdf => {
+                            const jobs = [];
+                            for (let i = 1; i <= pdf.numPages; i++) {
+                                jobs.push(pdf.getPage(i).then(p => p.getTextContent()).then(c => c.items.map(x => x.str).join(' ')));
+                            }
+                            return Promise.all(jobs);
+                        })
+                        .then(pages => _onResumeTextLoaded(pages.join('\n'), file, infoBox, infoContent))
+                        .catch(err => {
+                            infoBox.className = 'file-info-card error';
+                            infoContent.innerHTML = `<strong>❌ Could not read ${file.name}</strong> — ${err.message}. Try converting to .docx or .txt.`;
+                        });
+                };
                 reader.readAsArrayBuffer(file);
-            } else {
-                reader.readAsText(file);
+                return;
             }
+            if (isDoc && !isDocx) {
+                infoBox.className = 'file-info-card error';
+                infoContent.innerHTML = `<strong>❌ ${file.name}</strong> — Old .doc format is not supported. Open it in Word and save as <strong>.docx</strong> or <strong>.txt</strong>.`;
+                return;
+            }
+            if (isDocx) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    _loadMammoth()
+                        .then(mammoth => mammoth.extractRawText({ arrayBuffer: e.target.result }))
+                        .then(result => _onResumeTextLoaded(result.value, file, infoBox, infoContent))
+                        .catch(() => {
+                            infoBox.className = 'file-info-card error';
+                            infoContent.innerHTML = `<strong>❌ Could not parse ${file.name}</strong> — Please save it as <strong>.txt</strong> and re-upload.`;
+                        });
+                };
+                reader.readAsArrayBuffer(file);
+                return;
+            }
+            // Plain text / other
+            const reader = new FileReader();
+            reader.onload = function(e) { _onResumeTextLoaded(e.target.result, file, infoBox, infoContent); };
+            reader.readAsText(file);
         }
 
         function analyzeSkillsFromResume() {
@@ -918,37 +1308,87 @@
         function generateDailyTasks() {
             userProfile.dailyTasks = [
                 {
-                    day: 1,
-                    week: 1,
-                    topic: 'Big O Notation & Time Complexity',
-                    concept: 'Understand how to measure algorithm efficiency using Big O, Big Theta, and Big Omega.',
-                    whyMatters: 'Critical for optimizing code and acing technical interviews',
-                    difficulty: 'Easy',
-                    time: 45,
-                    question: 'Analyze the time and space complexity of bubble sort. Write pseudocode for O(n log n) sorting.',
-                    codingChallenge: 'Implement merge sort and explain its time complexity'
+                    day: 1, week: 1,
+                    topic: 'Hash Maps & Two-Pointer Technique',
+                    concept: 'Learn to use a hash map to trade space for time — turning O(n²) brute force into O(n) solutions.',
+                    whyMatters: 'The hash map pattern appears in ~40% of Easy/Medium LeetCode problems and is a must-know for any technical interview.',
+                    difficulty: 'Easy', time: 45,
+                    question: 'Given an array, find two numbers that sum to a target. Why is a hash map better than nested loops?',
+                    coding: {
+                        title: 'Two Sum', difficulty: 'Easy',
+                        tags: ['Array', 'Hash Map'],
+                        description: 'Given an array of integers <code>nums</code> and an integer <code>target</code>, return the <strong>indices</strong> of the two numbers that add up to <code>target</code>. You may assume exactly one solution exists, and you cannot use the same element twice.',
+                        constraints: ['2 ≤ nums.length ≤ 10⁴', '-10⁹ ≤ nums[i] ≤ 10⁹', '-10⁹ ≤ target ≤ 10⁹', 'Exactly one valid answer exists'],
+                        examples: [
+                            { input: 'nums = [2, 7, 11, 15], target = 9', output: '[0, 1]', explanation: 'nums[0] + nums[1] = 2 + 7 = 9 ✓' },
+                            { input: 'nums = [3, 2, 4], target = 6', output: '[1, 2]', explanation: 'nums[1] + nums[2] = 2 + 4 = 6 ✓' },
+                            { input: 'nums = [3, 3], target = 6', output: '[0, 1]', explanation: 'Same value at different indices is allowed' }
+                        ],
+                        hint: 'For each number, check if its complement (target − num) is already stored in a hash map. Store each number with its index as you iterate.',
+                        starter: {
+                            javascript: `// Two Sum — Hash Map Solution  O(n) time · O(n) space\nfunction twoSum(nums, target) {\n  const map = new Map(); // stores { value -> index }\n  for (let i = 0; i < nums.length; i++) {\n    const complement = target - nums[i];\n    if (map.has(complement)) {\n      return [map.get(complement), i];\n    }\n    map.set(nums[i], i);\n  }\n  return [];\n}\n\nconsole.log(twoSum([2, 7, 11, 15], 9));  // [0, 1]\nconsole.log(twoSum([3, 2, 4], 6));        // [1, 2]\nconsole.log(twoSum([3, 3], 6));           // [0, 1]`,
+                            python: `# Two Sum — Hash Map Solution  O(n) time · O(n) space\ndef two_sum(nums, target):\n    seen = {}  # stores { value: index }\n    for i, num in enumerate(nums):\n        complement = target - num\n        if complement in seen:\n            return [seen[complement], i]\n        seen[num] = i\n    return []\n\nprint(two_sum([2, 7, 11, 15], 9))  # [0, 1]\nprint(two_sum([3, 2, 4], 6))        # [1, 2]\nprint(two_sum([3, 3], 6))           # [0, 1]`,
+                            typescript: `// Two Sum — Hash Map Solution  O(n) time · O(n) space\nfunction twoSum(nums: number[], target: number): number[] {\n  const map = new Map<number, number>();\n  for (let i = 0; i < nums.length; i++) {\n    const complement = target - nums[i];\n    if (map.has(complement)) return [map.get(complement)!, i];\n    map.set(nums[i], i);\n  }\n  return [];\n}\n\nconsole.log(twoSum([2, 7, 11, 15], 9));  // [0, 1]\nconsole.log(twoSum([3, 2, 4], 6));        // [1, 2]\nconsole.log(twoSum([3, 3], 6));           // [0, 1]`,
+                            java: `// Two Sum — Hash Map Solution  O(n) time · O(n) space\nimport java.util.HashMap;\nimport java.util.Map;\n\nclass Solution {\n    public int[] twoSum(int[] nums, int target) {\n        Map<Integer, Integer> map = new HashMap<>();\n        for (int i = 0; i < nums.length; i++) {\n            int complement = target - nums[i];\n            if (map.containsKey(complement)) {\n                return new int[]{map.get(complement), i};\n            }\n            map.put(nums[i], i);\n        }\n        return new int[]{};\n    }\n\n    public static void main(String[] args) {\n        Solution sol = new Solution();\n        int[] r1 = sol.twoSum(new int[]{2,7,11,15}, 9);\n        System.out.println(r1[0] + \", \" + r1[1]); // 0, 1\n        int[] r2 = sol.twoSum(new int[]{3,2,4}, 6);\n        System.out.println(r2[0] + \", \" + r2[1]); // 1, 2\n    }\n}`,
+                            cpp: `// Two Sum — Hash Map Solution  O(n) time · O(n) space\n#include <iostream>\n#include <vector>\n#include <unordered_map>\nusing namespace std;\n\nvector<int> twoSum(vector<int>& nums, int target) {\n    unordered_map<int, int> mp;\n    for (int i = 0; i < (int)nums.size(); i++) {\n        int complement = target - nums[i];\n        if (mp.count(complement)) return {mp[complement], i};\n        mp[nums[i]] = i;\n    }\n    return {};\n}\n\nint main() {\n    vector<int> n1 = {2, 7, 11, 15};\n    auto r1 = twoSum(n1, 9);\n    cout << r1[0] << \", \" << r1[1] << endl; // 0, 1\n    vector<int> n2 = {3, 2, 4};\n    auto r2 = twoSum(n2, 6);\n    cout << r2[0] << \", \" << r2[1] << endl; // 1, 2\n}`
+                        }
+                    }
                 },
                 {
-                    day: 2,
-                    week: 1,
-                    topic: 'Arrays & Linked Lists',
-                    concept: 'Master operations on arrays and linked lists (insert, delete, search).',
-                    whyMatters: 'Fundamental data structures used in 80% of coding interviews',
-                    difficulty: 'Medium',
-                    time: 60,
-                    question: 'Remove duplicates from a sorted array in-place. What\'s the optimal approach?',
-                    codingChallenge: 'LeetCode: Remove Duplicates from Sorted Array II'
+                    day: 2, week: 1,
+                    topic: 'Arrays — Sliding Window',
+                    concept: 'The sliding window technique maintains a range between two pointers, expanding or shrinking it based on a condition — avoiding nested loops.',
+                    whyMatters: 'Turns O(n²) subarray/substring problems into O(n). Appears constantly in stock, string, and subarray problems.',
+                    difficulty: 'Easy', time: 50,
+                    question: 'How do you track the minimum price and maximum profit in a single pass without comparing every pair of days?',
+                    coding: {
+                        title: 'Best Time to Buy and Sell Stock', difficulty: 'Easy',
+                        tags: ['Array', 'Greedy', 'Sliding Window'],
+                        description: 'You are given an array <code>prices</code> where <code>prices[i]</code> is the price of a stock on day <code>i</code>. You want to maximise profit by choosing a <strong>single day to buy</strong> and a <strong>different day in the future to sell</strong>. Return the maximum profit. If no profit is possible, return <code>0</code>.',
+                        constraints: ['1 ≤ prices.length ≤ 10⁵', '0 ≤ prices[i] ≤ 10⁴', 'You must buy before you sell'],
+                        examples: [
+                            { input: 'prices = [7, 1, 5, 3, 6, 4]', output: '5', explanation: 'Buy on day 2 (price = 1), sell on day 5 (price = 6). Profit = 6 − 1 = 5.' },
+                            { input: 'prices = [7, 6, 4, 3, 1]', output: '0', explanation: 'Prices only decrease — no profitable transaction is possible.' },
+                            { input: 'prices = [2, 4, 1, 7]', output: '6', explanation: 'Buy on day 1 (price = 1), sell on day 4 (price = 7). Profit = 6.' }
+                        ],
+                        hint: 'Track the minimum price seen so far as you iterate. For each day, calculate profit = currentPrice − minPrice and update the maximum profit.',
+                        starter: {
+                            javascript: `function maxProfit(prices) {\n  let minPrice = Infinity;\n  let maxProfit = 0;\n  for (let price of prices) {\n    // Update minPrice and maxProfit here\n  }\n  return maxProfit;\n}\n\nconsole.log(maxProfit([7, 1, 5, 3, 6, 4])); // 5\nconsole.log(maxProfit([7, 6, 4, 3, 1]));     // 0\nconsole.log(maxProfit([2, 4, 1, 7]));         // 6`,
+                            python: `def max_profit(prices):\n    min_price = float('inf')\n    max_profit = 0\n    for price in prices:\n        # Update min_price and max_profit here\n        pass\n    return max_profit\n\nprint(max_profit([7, 1, 5, 3, 6, 4]))  # 5\nprint(max_profit([7, 6, 4, 3, 1]))     # 0\nprint(max_profit([2, 4, 1, 7]))         # 6`,
+                            typescript: `function maxProfit(prices: number[]): number {\n  let minPrice = Infinity;\n  let maxProfit = 0;\n  for (const price of prices) {\n    // Your code here\n  }\n  return maxProfit;\n}\n\nconsole.log(maxProfit([7, 1, 5, 3, 6, 4])); // 5\nconsole.log(maxProfit([7, 6, 4, 3, 1]));     // 0`,
+                            java: `class Solution {\n    public int maxProfit(int[] prices) {\n        int minPrice = Integer.MAX_VALUE;\n        int maxProfit = 0;\n        // Your code here\n        return maxProfit;\n    }\n\n    public static void main(String[] args) {\n        Solution sol = new Solution();\n        System.out.println(sol.maxProfit(new int[]{7,1,5,3,6,4})); // 5\n        System.out.println(sol.maxProfit(new int[]{7,6,4,3,1}));   // 0\n    }\n}`,
+                            cpp: `#include <iostream>\n#include <vector>\n#include <climits>\nusing namespace std;\n\nint maxProfit(vector<int>& prices) {\n    int minPrice = INT_MAX, maxProfit = 0;\n    // Your code here\n    return maxProfit;\n}\n\nint main() {\n    vector<int> p1 = {7,1,5,3,6,4};\n    cout << maxProfit(p1) << endl; // 5\n}`
+                        }
+                    }
                 },
                 {
-                    day: 3,
-                    week: 1,
-                    topic: 'Hash Maps & Hash Tables',
-                    concept: 'Understand hashing, collisions, and hash map implementation.',
-                    whyMatters: 'Used to optimize problems from O(n²) to O(n)',
-                    difficulty: 'Medium',
-                    time: 50,
-                    question: 'Design a HashSet from scratch. Implement add, remove, and contains.',
-                    codingChallenge: 'Two Sum Problem - solve using hash map'
+                    day: 3, week: 1,
+                    topic: 'Stack — Matching & Validation',
+                    concept: 'A stack (LIFO) is perfect for problems that require matching the most recent open item — parentheses, HTML tags, undo history.',
+                    whyMatters: 'Stack-based problems appear in every major interview. Understanding LIFO order is foundational for parsers, compilers, and expression evaluation.',
+                    difficulty: 'Easy', time: 40,
+                    question: 'Why does the order of closing brackets matter, and how does a stack guarantee you are always checking the most recently opened bracket?',
+                    coding: {
+                        title: 'Valid Parentheses', difficulty: 'Easy',
+                        tags: ['String', 'Stack'],
+                        description: 'Given a string <code>s</code> containing only the characters <code>(</code>, <code>)</code>, <code>{</code>, <code>}</code>, <code>[</code>, <code>]</code>, determine if the string is <strong>valid</strong>. A string is valid if: (1) every open bracket is closed by the <em>same type</em> of bracket, and (2) open brackets are closed in the <em>correct order</em>.',
+                        constraints: ['1 ≤ s.length ≤ 10⁴', 's consists of parentheses only: \'()[]{}\'' ],
+                        examples: [
+                            { input: 's = "()"', output: 'true', explanation: 'One open, one matching close.' },
+                            { input: 's = "()[]{}"', output: 'true', explanation: 'Three separate valid pairs.' },
+                            { input: 's = "(]"', output: 'false', explanation: 'Open paren closed by a square bracket — mismatch.' },
+                            { input: 's = "([)]"', output: 'false', explanation: 'Wrong closing order — inner pair crosses outer pair.' },
+                            { input: 's = "{[]}"', output: 'true', explanation: 'Properly nested: square inside curly.' }
+                        ],
+                        hint: 'Push every opening bracket onto a stack. When you see a closing bracket, pop the stack and check if it matches. If the stack is empty at the end, the string is valid.',
+                        starter: {
+                            javascript: `function isValid(s) {\n  const stack = [];\n  const pairs = { ')': '(', '}': '{', ']': '[' };\n  for (const ch of s) {\n    if ('({['.includes(ch)) {\n      stack.push(ch);\n    } else {\n      // Check if the top of the stack matches\n    }\n  }\n  return stack.length === 0;\n}\n\nconsole.log(isValid("()"));     // true\nconsole.log(isValid("()[]{}")); // true\nconsole.log(isValid("(]"));     // false\nconsole.log(isValid("([)]"));   // false\nconsole.log(isValid("{[]}"));   // true`,
+                            python: `def is_valid(s):\n    stack = []\n    pairs = {')': '(', '}': '{', ']': '['}\n    for ch in s:\n        if ch in '({[':\n            stack.append(ch)\n        else:\n            # Check if top of stack matches\n            pass\n    return len(stack) == 0\n\nprint(is_valid("()"))      # True\nprint(is_valid("()[]{}"))  # True\nprint(is_valid("(]"))      # False\nprint(is_valid("([)]"))    # False\nprint(is_valid("{[]}"))    # True`,
+                            typescript: `function isValid(s: string): boolean {\n  const stack: string[] = [];\n  const pairs: Record<string, string> = { ')': '(', '}': '{', ']': '[' };\n  for (const ch of s) {\n    if ('({['.includes(ch)) { stack.push(ch); }\n    else { /* check and pop */ }\n  }\n  return stack.length === 0;\n}\n\nconsole.log(isValid("()"));      // true\nconsole.log(isValid("([)]"));    // false`,
+                            java: `import java.util.Stack;\n\nclass Solution {\n    public boolean isValid(String s) {\n        Stack<Character> stack = new Stack<>();\n        // Your code here\n        return stack.isEmpty();\n    }\n\n    public static void main(String[] args) {\n        Solution sol = new Solution();\n        System.out.println(sol.isValid("()"));     // true\n        System.out.println(sol.isValid("(]"));     // false\n        System.out.println(sol.isValid("{[]}"));   // true\n    }\n}`,
+                            cpp: `#include <iostream>\n#include <stack>\n#include <string>\n#include <unordered_map>\nusing namespace std;\n\nbool isValid(string s) {\n    stack<char> st;\n    unordered_map<char,char> pairs = {{')',  '('},{'}',  '{'},{']',  '['}};\n    // Your code here\n    return st.empty();\n}\n\nint main() {\n    cout << isValid("()") << endl;      // 1\n    cout << isValid("([)]") << endl;    // 0\n    cout << isValid("{[]}") << endl;    // 1\n}`
+                        }
+                    }
                 }
             ];
         }
@@ -1092,9 +1532,25 @@
 
         function generateDailyTaskDisplay() {
             const task = userProfile.dailyTasks[0];
+            window._currentCodingObj = task.coding;
+            const c = task.coding;
+            const diffColor = { Easy:'#065f46', Medium:'#78350f', Hard:'#991b1b' }[c.difficulty] || '#374151';
+            const diffBg   = { Easy:'#d1fae5', Medium:'#fef3c7', Hard:'#fee2e2' }[c.difficulty] || '#f3f4f6';
+            const tagHtml  = (c.tags||[]).map(t=>`<span style="background:#f3f4f6;color:#374151;padding:2px 8px;border-radius:20px;font-size:0.75em;">${t}</span>`).join('');
+
+            const examplesHtml = c.examples.map((ex,i)=>`
+                <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 14px;margin-bottom:8px;font-family:Consolas,monospace;font-size:0.86em;">
+                    <div style="font-weight:700;color:#374151;margin-bottom:6px;">Example ${i+1}:</div>
+                    <div><strong>Input:</strong> <span style="color:#0369a1;">${ex.input}</span></div>
+                    <div><strong>Output:</strong> <span style="color:#065f46;">${ex.output}</span></div>
+                    ${ex.explanation?`<div style="color:#64748b;margin-top:4px;font-family:inherit;font-size:0.95em;"><strong>Explanation:</strong> ${ex.explanation}</div>`:''}
+                </div>`).join('');
+
+            const constraintsHtml = c.constraints.map(ct=>`<li style="color:#374151;font-size:0.87em;margin-bottom:3px;">${ct}</li>`).join('');
+
             const html = `
                 <div class="task-card">
-                    <div class="task-day">📅 Day ${task.day} - Week ${task.week}</div>
+                    <div class="task-day">📅 Day ${task.day} — Week ${task.week}</div>
                     <div class="task-title">📚 ${task.topic}</div>
 
                     <div class="task-section">
@@ -1108,17 +1564,30 @@
                     </div>
 
                     <div class="task-section">
-                        <div class="task-section-title">💻 Coding Challenge</div>
-                        <div style="margin-bottom: 10px;">
-                            <span class="difficulty-badge">${task.difficulty}</span>
-                            <span class="difficulty-badge" style="margin-left: 10px;">⏱️ ~${task.time} mins</span>
-                        </div>
-                        <div class="task-content">${task.codingChallenge}</div>
+                        <div class="task-section-title">💡 Think About It First</div>
+                        <div class="task-content" style="font-style:italic;color:var(--gray);">${task.question}</div>
                     </div>
 
-                    <div class="task-section">
-                        <div class="task-section-title">✅ After Solving</div>
-                        <div class="task-content">Explain your approach in your own words. What's the time/space complexity? Any edge cases?</div>
+                    <div class="task-section" style="border-top:2px solid var(--border);padding-top:20px;margin-top:20px;">
+                        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+                            <div class="task-section-title" style="margin-bottom:0;">💻 Coding Challenge</div>
+                            <span style="background:${diffBg};color:${diffColor};padding:3px 10px;border-radius:20px;font-size:0.78em;font-weight:700;">${c.difficulty}</span>
+                            <span style="background:#f3f4f6;color:#374151;padding:3px 10px;border-radius:20px;font-size:0.78em;">⏱ ~${task.time} mins</span>
+                            ${tagHtml}
+                        </div>
+
+                        <div style="font-size:1.1em;font-weight:700;color:#0369a1;margin-bottom:10px;">${c.title}</div>
+                        <div style="color:#374151;line-height:1.75;margin-bottom:14px;font-size:0.95em;">${c.description}</div>
+
+                        <div style="font-weight:700;color:#374151;margin-bottom:8px;font-size:0.9em;">Examples:</div>
+                        ${examplesHtml}
+
+                        <div style="font-weight:700;color:#374151;margin:12px 0 6px;font-size:0.9em;">Constraints:</div>
+                        <ul style="margin-left:18px;margin-bottom:12px;">${constraintsHtml}</ul>
+
+                        ${c.hint?`<div style="padding:10px 14px;background:#fffbeb;border-left:3px solid #f59e0b;border-radius:4px;font-size:0.87em;color:#78350f;margin-bottom:14px;"><strong>💡 Hint:</strong> ${c.hint}</div>`:''}
+
+                        <button class="btn btn-primary" onclick="openInlineEditor(window._currentCodingObj)">💻 Open Code Editor Below</button>
                     </div>
                 </div>
             `;
@@ -1167,146 +1636,657 @@
             document.getElementById('progressContent').innerHTML = html;
         }
 
-        /**
-         * Start mock interview
-         */
+        // ==================== MOCK INTERVIEW ====================
+        const _iqBank = [
+            {
+                category: 'System Design', difficulty: 'Hard',
+                question: 'Design a URL shortener (e.g. bit.ly). Walk through the components needed and how you would scale it to handle millions of requests per day.',
+                required: [['database', 'db', 'storage'], ['hash', 'hashing', 'encode', 'base62'], ['cache', 'redis', 'memcache']],
+                optional: ['load balancer', 'CDN', 'collision', 'redirect', 'expiry', 'analytics', 'NoSQL', 'consistent hashing', 'sharding'],
+                ideal: 'Core components: (1) Hash function — base62-encode a counter or MD5 the URL, trimmed to 6–7 chars; (2) Database — key-value store (DynamoDB/Cassandra) for fast lookups; (3) Cache — Redis to serve hot URLs without DB hits; (4) Load balancer — distribute traffic across app servers; (5) Handle collisions — retry with a different hash; (6) Analytics — log click events asynchronously. Scale: read-heavy, so cache aggressively and scale read replicas.'
+            },
+            {
+                category: 'Algorithms', difficulty: 'Medium',
+                question: 'Explain the two-pointer technique. When would you use it? Walk through solving "find a pair in a sorted array that sums to a target" step by step.',
+                required: [['two pointer', 'two-pointer', 'left', 'right'], ['sorted'], ['O(n)', 'linear time', 'linear complexity']],
+                optional: ['in-place', 'O(1) space', 'converge', 'sliding window', 'pair sum', 'opposite ends'],
+                ideal: 'Two pointers: set left=0 and right=n−1 on a sorted array. If sum < target move left++; if sum > target move right−−; if equal, return the pair. O(n) time, O(1) space — no extra structure needed. Also useful for: palindrome check, removing duplicates in-place, container with most water, merge sorted arrays.'
+            },
+            {
+                category: 'OOP & Design Patterns', difficulty: 'Medium',
+                question: 'Explain the SOLID principles. Give a concrete example of how violating the Single Responsibility Principle causes real problems in a codebase.',
+                required: [['single responsibility', 'srp'], ['open closed', 'open/closed'], ['interface', 'dependency']],
+                optional: ['liskov', 'coupling', 'cohesion', 'refactor', 'maintainable', 'extend', 'abstract'],
+                ideal: 'SOLID: S=Single Responsibility (one reason to change), O=Open/Closed (extend without modifying), L=Liskov Substitution (subclasses replaceable), I=Interface Segregation (small focused interfaces), D=Dependency Inversion (depend on abstractions). SRP violation example: a User class handling auth AND sending emails — changing email templates forces retesting auth logic, increases coupling, makes the class untestable in isolation.'
+            },
+            {
+                category: 'Behavioral', difficulty: 'Easy',
+                question: 'Tell me about a time you debugged a difficult production issue under time pressure. Walk through your exact approach.',
+                required: [['situation', 'context', 'production', 'incident'], ['action', 'logs', 'debug', 'investigate', 'monitor'], ['result', 'fixed', 'resolved', 'outcome']],
+                optional: ['root cause', 'rollback', 'hypothesis', 'team', 'escalate', 'learned', 'prevent', 'metrics', 'impact'],
+                ideal: 'Use STAR: Situation — describe the incident and business impact. Task — your role. Action — how you triaged (checked logs/metrics, isolated the component, formed and tested hypotheses, communicated status to stakeholders). Result — time to resolution, what you changed (post-mortem, alerting, tests) to prevent recurrence. Quantify impact where possible.'
+            },
+            {
+                category: 'Data Structures', difficulty: 'Medium',
+                question: 'Compare HashMap vs TreeMap in Java (or dict vs SortedDict in Python). When would you choose one over the other? Cover time-complexity trade-offs.',
+                required: [['O(1)', 'constant time', 'average'], ['O(log n)', 'logarithmic'], ['sorted', 'ordered', 'order']],
+                optional: ['hash collision', 'range query', 'red-black', 'bucket', 'iteration', 'floor', 'ceiling', 'worst case'],
+                ideal: 'HashMap/dict: O(1) average for get/put/remove. No ordering. Use when order does not matter and speed is priority. TreeMap/SortedDict: O(log n) always, backed by a Red-Black tree, keys always sorted. Use when you need sorted iteration, range queries (keys between A and B), or floor/ceiling lookups. HashMap worst case is O(n) with many collisions; TreeMap is always O(log n) but slower on average.'
+            },
+            {
+                category: 'System Design', difficulty: 'Hard',
+                question: 'Design a notification system (push, email, SMS) that must reliably send 10 million notifications per day without duplication or loss.',
+                required: [['queue', 'message queue', 'kafka', 'sqs'], ['retry', 'retry logic', 'dead letter'], ['rate limit', 'throttl', 'idempot']],
+                optional: ['worker', 'fanout', 'priority', 'batch', 'template', 'deduplication', 'backoff', 'async', 'channel'],
+                ideal: '(1) Message queue (Kafka/SQS) decouples producers from workers and handles traffic spikes; (2) Separate worker pools per channel (push/email/SMS); (3) Exponential backoff retry + dead-letter queue for failures; (4) Idempotency keys prevent duplicate sends on retries; (5) Rate limiting per user and per provider (email providers throttle); (6) Priority queues — transactional > marketing; (7) Template service for rendering messages.'
+            },
+            {
+                category: 'Concurrency', difficulty: 'Hard',
+                question: 'What is the difference between a thread and a process? Define a race condition and explain three different ways to prevent it.',
+                required: [['memory', 'shared memory', 'address space'], ['lock', 'mutex', 'synchronization', 'atomic'], ['race condition', 'race']],
+                optional: ['deadlock', 'semaphore', 'gil', 'thread-safe', 'context switch', 'immutable', 'message passing', 'cpu'],
+                ideal: 'Process: isolated memory space, OS-managed, higher context-switch overhead. Thread: shares memory with parent process, lightweight but shared state = race conditions. Race condition: two threads concurrently read-modify-write shared data producing unpredictable results. Prevention: (1) Mutex/Lock — one thread in critical section at a time; (2) Atomic operations — hardware-level indivisible read-modify-write; (3) Immutable data or message-passing — no shared state at all. Python has the GIL, limiting CPU-bound threading.'
+            },
+            {
+                category: 'Algorithms', difficulty: 'Easy',
+                question: 'Compare BFS and DFS. What data structures do each use? Give a specific scenario where you would choose one over the other.',
+                required: [['queue', 'fifo', 'bfs'], ['stack', 'recursion', 'dfs'], ['shortest path', 'shortest', 'unweighted']],
+                optional: ['level order', 'cycle detection', 'topological', 'visited', 'O(V+E)', 'space', 'width', 'depth', 'connected component'],
+                ideal: 'BFS uses a queue (FIFO), explores level by level — use for shortest path in unweighted graphs and level-order traversal. DFS uses a stack or recursion, explores depth-first — use for cycle detection, topological sort, connected components, exhaustive search. Space: BFS = O(max width), DFS = O(max depth). For a very wide shallow graph DFS saves memory; for a very deep narrow graph BFS saves memory.'
+            }
+        ];
+
+        let _iqState = { idx: 0, shuffled: [] };
+
         function startMockInterview() {
-            const html = `
-                <div class="alert alert-info">
-                    <strong>🎤 Ready?</strong> I'll ask you a technical or behavioral question and give detailed feedback.
-                </div>
+            const arr = [..._iqBank];
+            for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; }
+            _iqState = { idx: 0, shuffled: arr };
+            _showIQ();
+        }
 
-                <div style="margin: 20px 0; padding: 20px; background: var(--light); border-radius: 8px; border-left: 4px solid var(--accent);">
-                    <div style="font-weight: 700; color: var(--dark); margin-bottom: 10px;">Technical Question 1/3</div>
-                    <div style="color: var(--gray); font-size: 0.95em; line-height: 1.6;">
-                        "Design a distributed cache system that can handle millions of requests per second. Consider consistency, availability, and partition tolerance (CAP theorem)."
+        function _showIQ() {
+            const q = _iqState.shuffled[_iqState.idx];
+            const total = _iqState.shuffled.length;
+            const diffClass = { Easy: 'badge-easy', Medium: 'badge-medium', Hard: 'badge-hard' }[q.difficulty] || 'badge-easy';
+            document.getElementById('interviewContent').innerHTML = `
+                <div class="interview-q-card">
+                    <div class="interview-meta">
+                        <span class="badge badge-qnum">Q ${_iqState.idx + 1} / ${total}</span>
+                        <span class="badge badge-category">${q.category}</span>
+                        <span class="badge ${diffClass}">${q.difficulty}</span>
                     </div>
+                    <div style="font-size:1.05em;font-weight:600;color:var(--dark);line-height:1.65;">${q.question}</div>
                 </div>
-
                 <div class="form-group">
-                    <label>Your Answer</label>
-                    <textarea id="interviewAnswer" placeholder="Write your answer here... Explain your approach, trade-offs, and how you'd handle edge cases."></textarea>
+                    <label style="font-weight:600;">Your Answer <span style="color:var(--gray);font-weight:400;font-size:0.9em;">— be specific, mention key concepts, trade-offs and examples</span></label>
+                    <textarea id="interviewAnswer" rows="7" style="resize:vertical;" placeholder="Write a thorough answer here. Cover the core concepts, trade-offs, and a concrete example where relevant. Aim for at least 4–5 sentences."></textarea>
                 </div>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                    <button class="btn btn-accent" onclick="submitInterviewAnswer()">✓ Submit &amp; Get Feedback</button>
+                    ${_iqState.idx < total - 1 ? `<button class="btn btn-secondary" onclick="_skipIQ()">Skip →</button>` : ''}
+                </div>`;
+        }
 
-                <button class="btn btn-accent" onclick="submitInterviewAnswer()">Submit Answer & Get Feedback</button>
-            `;
-            document.getElementById('interviewContent').innerHTML = html;
+        function _skipIQ() {
+            if (_iqState.idx < _iqState.shuffled.length - 1) { _iqState.idx++; _showIQ(); }
+        }
+
+        function _nextIQ() {
+            if (_iqState.idx < _iqState.shuffled.length - 1) { _iqState.idx++; _showIQ(); }
         }
 
         function submitInterviewAnswer() {
-            const answer = document.getElementById('interviewAnswer').value;
-            if (!answer.trim()) {
-                alert('Please provide an answer');
+            const answer = (document.getElementById('interviewAnswer').value || '').trim();
+            if (!answer) { alert('Please write an answer before submitting.'); return; }
+            const q = _iqState.shuffled[_iqState.idx];
+            const r = analyzeAnswerQuality(answer, q);
+            const total = _iqState.shuffled.length;
+            const isLast = _iqState.idx >= total - 1;
+            const barColor = r.score >= 70 ? '#10b981' : r.score >= 40 ? '#f59e0b' : '#ef4444';
+            const scoreLabel = r.score >= 70 ? '✅ Strong Answer' : r.score >= 40 ? '⚡ Good Start' : '⚠️ Needs More Depth';
+            const diffClass = { Easy: 'badge-easy', Medium: 'badge-medium', Hard: 'badge-hard' }[q.difficulty] || 'badge-easy';
+
+            const hitTags = r.covered.map(c => `<span class="concept-tag concept-hit">✓ ${c}</span>`).join('');
+            const missReqTags = r.missedRequired.map(c => `<span class="concept-tag concept-miss-req">✗ ${c}</span>`).join('');
+            const missOptTags = r.missedOptional.map(c => `<span class="concept-tag concept-miss-opt">◦ ${c}</span>`).join('');
+
+            document.getElementById('interviewContent').innerHTML = `
+                <div class="interview-q-card" style="border-left-color:${barColor};">
+                    <div class="interview-meta">
+                        <span class="badge badge-qnum">Q ${_iqState.idx + 1} / ${total}</span>
+                        <span class="badge badge-category">${q.category}</span>
+                        <span class="badge ${diffClass}">${q.difficulty}</span>
+                    </div>
+                    <div style="font-size:0.95em;color:var(--gray);line-height:1.6;">${q.question}</div>
+                </div>
+
+                <div style="background:white;border:2px solid ${barColor};border-radius:10px;padding:18px 20px;margin:4px 0 16px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                        <span style="font-weight:700;font-size:1.05em;color:${barColor};">${scoreLabel}</span>
+                        <span style="font-weight:800;font-size:1.4em;color:${barColor};">${r.score}<span style="font-size:0.65em;font-weight:600;">/100</span></span>
+                    </div>
+                    <div class="score-bar-wrap"><div class="score-bar-fill" style="width:${r.score}%;background:${barColor};"></div></div>
+                    <div style="color:var(--gray);font-size:0.82em;margin-top:4px;">${r.wordCount} words · ${r.covered.length} of ${r.covered.length + r.missedRequired.length + r.missedOptional.length} concepts covered</div>
+                </div>
+
+                ${r.covered.length > 0 ? `<div style="margin-bottom:14px;">
+                    <div style="font-weight:700;color:#065f46;margin-bottom:6px;font-size:0.9em;">✅ Concepts You Covered:</div>
+                    <div class="concept-tags">${hitTags}</div>
+                </div>` : ''}
+
+                ${(r.missedRequired.length > 0 || r.missedOptional.length > 0) ? `<div style="margin-bottom:14px;">
+                    <div style="font-weight:700;color:#991b1b;margin-bottom:6px;font-size:0.9em;">❌ Missing Concepts:</div>
+                    <div class="concept-tags">${missReqTags}${missOptTags}</div>
+                    <div style="font-size:0.8em;color:var(--gray);margin-top:5px;">Red = key concept you must mention &nbsp;·&nbsp; Grey = bonus concept</div>
+                </div>` : ''}
+
+                <details class="ideal-answer-block">
+                    <summary>💡 View Ideal Answer</summary>
+                    <p>${q.ideal}</p>
+                </details>
+
+                <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;">
+                    <button class="btn btn-secondary" onclick="_showIQ()">↩ Retry This Question</button>
+                    ${!isLast
+                        ? `<button class="btn btn-accent" onclick="_nextIQ()">Next Question →</button>`
+                        : `<button class="btn btn-success" onclick="startMockInterview()">🔄 Restart Interview</button>`}
+                </div>`;
+        }
+
+        function analyzeAnswerQuality(answer, q) {
+            const al = answer.toLowerCase();
+            const wordCount = answer.trim().split(/\s+/).length;
+            const covered = [], missedRequired = [], missedOptional = [];
+
+            const matches = (concept) => (Array.isArray(concept) ? concept : [concept]).some(t => al.includes(t.toLowerCase()));
+            const label = (concept) => Array.isArray(concept) ? concept[0] : concept;
+
+            (q.required || []).forEach(c => { if (matches(c)) covered.push(label(c)); else missedRequired.push(label(c)); });
+            (q.optional || []).forEach(c => { if (matches(c)) covered.push(label(c)); else missedOptional.push(label(c)); });
+
+            const reqTotal = (q.required || []).length;
+            const reqHit = reqTotal - missedRequired.length;
+            const optHit = (q.optional || []).length - missedOptional.length;
+
+            let score = reqTotal > 0 ? Math.round((reqHit / reqTotal) * 60) : 60;
+            score += Math.min(optHit * 5, 25);
+            if (wordCount >= 40) score += 5;
+            if (wordCount >= 80) score += 5;
+            if (wordCount < 15) score = Math.min(score, 20);
+
+            return { score: Math.max(5, Math.min(100, score)), covered, missedRequired, missedOptional, wordCount };
+        }
+
+        // ==================== QUICK DEMO ====================
+        function loadDemo() {
+            userProfile.name = 'Learner';
+            userProfile.targetRole = 'Senior Software Engineer';
+            userProfile.resume = `
+                5 years of software engineering experience.
+                Skills: Python, JavaScript, React, Node.js, SQL, REST APIs, Git.
+                Experience with data structures, algorithms, system design.
+                Worked on web applications, microservices, and cloud platforms (AWS).
+                Familiar with Docker, CI/CD pipelines.
+            `;
+            analyzeSkillsFromResume();
+            detectGaps();
+            generateRoadmap();
+            generateDailyTasks();
+            startDailyLearning();
+        }
+
+        // ==================== CODE EDITOR ====================
+        let monacoEditor = null;
+        let _editorPrevSection = 'dailySection';
+
+        const _codeTemplates = {
+            javascript: `// Two Sum — return indices of two numbers that add up to target
+function twoSum(nums, target) {
+    const map = new Map();
+    for (let i = 0; i < nums.length; i++) {
+        const complement = target - nums[i];
+        if (map.has(complement)) {
+            return [map.get(complement), i];
+        }
+        map.set(nums[i], i);
+    }
+    return [];
+}
+
+// Test cases
+console.log(twoSum([2, 7, 11, 15], 9));  // [0, 1]
+console.log(twoSum([3, 2, 4], 6));        // [1, 2]
+console.log(twoSum([3, 3], 6));           // [0, 1]`,
+
+            typescript: `function twoSum(nums: number[], target: number): number[] {
+    const map = new Map<number, number>();
+    for (let i = 0; i < nums.length; i++) {
+        const complement = target - nums[i];
+        if (map.has(complement)) {
+            return [map.get(complement)!, i];
+        }
+        map.set(nums[i], i);
+    }
+    return [];
+}
+
+console.log(twoSum([2, 7, 11, 15], 9));  // [0, 1]
+console.log(twoSum([3, 2, 4], 6));        // [1, 2]`,
+
+            python: `# Two Sum — return indices of two numbers that add up to target
+def two_sum(nums, target):
+    seen = {}
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in seen:
+            return [seen[complement], i]
+        seen[num] = i
+    return []
+
+# Test cases
+print(two_sum([2, 7, 11, 15], 9))  # [0, 1]
+print(two_sum([3, 2, 4], 6))       # [1, 2]`,
+
+            java: `import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (map.containsKey(complement)) {
+                return new int[]{map.get(complement), i};
+            }
+            map.put(nums[i], i);
+        }
+        return new int[]{};
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int[] result = sol.twoSum(new int[]{2, 7, 11, 15}, 9);
+        System.out.println(result[0] + ", " + result[1]); // 0, 1
+    }
+}`,
+
+            cpp: `#include <iostream>
+#include <vector>
+#include <unordered_map>
+using namespace std;
+
+vector<int> twoSum(vector<int>& nums, int target) {
+    unordered_map<int, int> mp;
+    for (int i = 0; i < (int)nums.size(); i++) {
+        int complement = target - nums[i];
+        if (mp.count(complement)) return {mp[complement], i};
+        mp[nums[i]] = i;
+    }
+    return {};
+}
+
+int main() {
+    vector<int> nums = {2, 7, 11, 15};
+    auto res = twoSum(nums, 9);
+    cout << res[0] << ", " << res[1] << endl; // 0, 1
+    return 0;
+}`
+        };
+
+        function openCodeEditor(problemText) {
+            const active = document.querySelector('.section.active');
+            _editorPrevSection = active ? active.id : 'dailySection';
+            if (problemText) {
+                document.getElementById('editorProblemText').textContent = problemText;
+            }
+            showSection('codeEditorSection');
+            setTimeout(() => { if (monacoEditor) monacoEditor.layout(); }, 80);
+        }
+
+        function goBackFromEditor() {
+            showSection(_editorPrevSection);
+        }
+
+        function initMonacoEditor() {
+            require(['vs/editor/editor.main'], function() {
+                monacoEditor = monaco.editor.create(document.getElementById('monacoContainer'), {
+                    value: _codeTemplates.javascript,
+                    language: 'javascript',
+                    theme: 'vs-dark',
+                    fontSize: 14,
+                    minimap: { enabled: false },
+                    scrollBeyondLastLine: false,
+                    automaticLayout: true,
+                    fontFamily: "'Cascadia Code', 'Fira Code', Consolas, monospace",
+                    lineNumbers: 'on',
+                    wordWrap: 'on',
+                    tabSize: 4,
+                    padding: { top: 12 }
+                });
+            });
+        }
+
+        function changeLanguage(lang) {
+            if (!monacoEditor) return;
+            monaco.editor.setModelLanguage(monacoEditor.getModel(), lang);
+            monacoEditor.setValue(_codeTemplates[lang] || '// Start coding...\n');
+            clearOutput();
+        }
+
+        function resetCode() {
+            if (!monacoEditor) return;
+            const lang = document.getElementById('languageSelect').value;
+            monacoEditor.setValue(_codeTemplates[lang] || '// Start coding...\n');
+            clearOutput();
+        }
+
+        function copyCode(evt) {
+            if (!monacoEditor) return;
+            const code = monacoEditor.getValue();
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = evt.target;
+                const orig = btn.textContent;
+                btn.textContent = '✓ Copied!';
+                setTimeout(() => btn.textContent = orig, 2000);
+            }).catch(() => {
+                const ta = document.createElement('textarea');
+                ta.value = code;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                alert('Code copied to clipboard!');
+            });
+        }
+
+        // ==================== INLINE CODE EDITOR ====================
+        let inlineMonacoEditor = null;
+        let _currentInlineChallenge = null;
+
+        function openInlineEditor(challenge) {
+            _currentInlineChallenge = challenge;
+            const panel = document.getElementById('inlineCodingPanel');
+            panel.style.display = 'block';
+
+            // Render problem description
+            const c = challenge;
+            const diffColor = { Easy:'#065f46', Medium:'#78350f', Hard:'#991b1b' }[c.difficulty] || '#374151';
+            const diffBg   = { Easy:'#d1fae5', Medium:'#fef3c7', Hard:'#fee2e2' }[c.difficulty] || '#f3f4f6';
+            const tagHtml  = (c.tags||[]).map(t=>`<span style="background:#e0e7ff;color:#3730a3;padding:2px 8px;border-radius:20px;font-size:0.75em;">${t}</span>`).join('');
+            const exHtml   = c.examples.map((ex,i)=>`
+                <div style="background:#fff;border:1px solid #e2e8f0;border-radius:6px;padding:10px 12px;margin-bottom:7px;font-family:Consolas,monospace;font-size:0.84em;">
+                    <div style="font-weight:700;color:#374151;margin-bottom:5px;">Example ${i+1}:</div>
+                    <div><b>Input:</b> <span style="color:#0369a1;">${ex.input}</span></div>
+                    <div><b>Output:</b> <span style="color:#065f46;">${ex.output}</span></div>
+                    ${ex.explanation?`<div style="color:#64748b;margin-top:3px;font-family:inherit;"><b>Explanation:</b> ${ex.explanation}</div>`:''}
+                </div>`).join('');
+            const conHtml  = c.constraints.map(ct=>`<li style="color:#374151;font-size:0.86em;margin-bottom:2px;">${ct}</li>`).join('');
+            document.getElementById('inlineProblemPanel').innerHTML = `
+                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+                    <span style="font-weight:800;font-size:1.05em;color:#0369a1;">${c.title}</span>
+                    <span style="background:${diffBg};color:${diffColor};padding:2px 10px;border-radius:20px;font-size:0.78em;font-weight:700;">${c.difficulty}</span>
+                    ${tagHtml}
+                </div>
+                <p style="color:#374151;line-height:1.7;margin-bottom:10px;font-size:0.92em;">${c.description}</p>
+                ${exHtml}
+                <div style="font-weight:700;color:#374151;margin:8px 0 4px;font-size:0.86em;">Constraints:</div>
+                <ul style="margin-left:16px;margin-bottom:8px;">${conHtml}</ul>
+                ${c.hint?`<div style="padding:8px 12px;background:#fffbeb;border-left:3px solid #f59e0b;border-radius:4px;font-size:0.84em;color:#78350f;margin-top:6px;"><b>💡 Hint:</b> ${c.hint}</div>`:''}
+            `;
+
+            const lang = document.getElementById('inlineLangSelect').value;
+            const starterCode = (challenge.starter && challenge.starter[lang]) || '// Start coding...\n';
+
+            if (!inlineMonacoEditor) {
+                require(['vs/editor/editor.main'], function() {
+                    inlineMonacoEditor = monaco.editor.create(document.getElementById('inlineMonacoContainer'), {
+                        value: starterCode,
+                        language: lang === 'cpp' ? 'cpp' : lang,
+                        theme: 'vs-dark',
+                        fontSize: 14,
+                        minimap: { enabled: false },
+                        automaticLayout: true,
+                        scrollBeyondLastLine: false
+                    });
+                });
+            } else {
+                monaco.editor.setModelLanguage(inlineMonacoEditor.getModel(), lang === 'cpp' ? 'cpp' : lang);
+                inlineMonacoEditor.setValue(starterCode);
+            }
+
+            // Clear output and scroll into view
+            const out = document.getElementById('inlineOutputArea');
+            out.textContent = '// Click "▶ Run" to execute your code...';
+            out.style.color = '#9cdcfe';
+            setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
+        }
+
+        function changeInlineLanguage(lang) {
+            if (!inlineMonacoEditor || !_currentInlineChallenge) return;
+            const code = (_currentInlineChallenge.starter && _currentInlineChallenge.starter[lang]) || '// Start coding...\n';
+            monaco.editor.setModelLanguage(inlineMonacoEditor.getModel(), lang === 'cpp' ? 'cpp' : lang);
+            inlineMonacoEditor.setValue(code);
+            const out = document.getElementById('inlineOutputArea');
+            out.textContent = '// Click "▶ Run" to execute your code...';
+            out.style.color = '#9cdcfe';
+        }
+
+        function resetInlineCode() {
+            if (!inlineMonacoEditor || !_currentInlineChallenge) return;
+            const lang = document.getElementById('inlineLangSelect').value;
+            const code = (_currentInlineChallenge.starter && _currentInlineChallenge.starter[lang]) || '// Start coding...\n';
+            inlineMonacoEditor.setValue(code);
+        }
+
+        function closeInlineEditor() {
+            document.getElementById('inlineCodingPanel').style.display = 'none';
+        }
+
+        function runInlineCode() {
+            if (!inlineMonacoEditor) return;
+            const lang = document.getElementById('inlineLangSelect').value;
+            const code = inlineMonacoEditor.getValue();
+            const out  = document.getElementById('inlineOutputArea');
+
+            if (lang === 'python') { _runPython(code, out); return; }
+
+            if (lang !== 'javascript' && lang !== 'typescript') {
+                out.style.color = '#9cdcfe';
+                out.textContent = `ℹ️  ${lang} requires a local compiler.\nCopy the code and run it in your IDE or at onlinegdb.com`;
                 return;
             }
 
-            // Analyze answer quality based on keywords and length
-            const qualityScore = analyzeAnswerQuality(answer, userProfile.currentQuestion);
-            
-            let feedbackHtml = '';
-            
-            if (qualityScore.score < 30) {
-                feedbackHtml = `
-                    <div class="alert alert-danger" style="margin-bottom: 20px;">
-                        <strong>⚠️ Needs More Detail</strong>
-                    </div>
-                    <div style="margin-bottom: 20px; padding: 15px; background: #fee2e2; border-radius: 8px;">
-                        <div style="font-weight: 700; color: #991b1b; margin-bottom: 10px;">Feedback:</div>
-                        <p style="color: #991b1b; margin-bottom: 10px;">${qualityScore.feedback}</p>
-                        <p style="color: #991b1b;"><strong>Suggestions:</strong> ${qualityScore.suggestions}</p>
-                    </div>
-                `;
-            } else if (qualityScore.score < 60) {
-                feedbackHtml = `
-                    <div class="alert alert-warning" style="margin-bottom: 20px;">
-                        <strong>✓ Good Start</strong> - Room for improvement
-                    </div>
-                    <div style="margin-bottom: 20px; padding: 15px; background: #fef3c7; border-radius: 8px;">
-                        <div style="font-weight: 700; color: #78350f; margin-bottom: 10px;">What Was Good:</div>
-                        <p style="color: #78350f; margin-bottom: 10px;">${qualityScore.strengths}</p>
-                        <div style="font-weight: 700; color: #78350f; margin-bottom: 10px; margin-top: 15px;">Areas to Enhance:</div>
-                        <p style="color: #78350f;">${qualityScore.suggestions}</p>
-                    </div>
-                `;
-            } else {
-                feedbackHtml = `
-                    <div class="alert alert-success" style="margin-bottom: 20px;">
-                        <strong>✅ Excellent Answer!</strong>
-                    </div>
-                    <div style="margin-bottom: 20px; padding: 15px; background: #d1fae5; border-radius: 8px;">
-                        <div style="font-weight: 700; color: #065f46; margin-bottom: 10px;">Why This Answer Works:</div>
-                        <p style="color: #065f46; margin-bottom: 10px;">${qualityScore.strengths}</p>
-                        <div style="font-weight: 700; color: #065f46; margin-bottom: 10px; margin-top: 15px;">Key Points Covered:</div>
-                        <ul style="color: #065f46; margin-left: 20px;">${qualityScore.keyPoints}</ul>
-                    </div>
-                `;
-            }
-            
-            feedbackHtml += `
-                <div style="margin-top: 20px; padding: 15px; background: #f0f9ff; border-radius: 8px; border-left: 4px solid #3b82f6;">
-                    <div style="font-weight: 700; color: #1e40af; margin-bottom: 10px;">📊 Score: ${qualityScore.score}/100</div>
-                </div>
-                <button class="btn btn-secondary mt-20" onclick="startMockInterview()">Next Question</button>
-            `;
-            
-            document.getElementById('interviewContent').innerHTML = feedbackHtml;
+            out.style.color = '#9cdcfe';
+            out.textContent = 'Running...';
+            let done = false;
+
+            const handler = function(e) {
+                if (!e.data || e.data.type !== 'inlineOutput') return;
+                done = true;
+                window.removeEventListener('message', handler);
+                if (e.data.error) {
+                    out.style.color = '#f48771';
+                    out.textContent = '❌ Error:\n' + e.data.error;
+                } else {
+                    out.style.color = '#89d185';
+                    out.textContent = e.data.logs.length > 0 ? e.data.logs.join('\n') : '✓ Code ran successfully (no console output)';
+                }
+            };
+            window.addEventListener('message', handler);
+
+            const codeJson = JSON.stringify(code).replace(/</g,'\\u003C').replace(/>/g,'\\u003E');
+            document.getElementById('inlineSandbox').srcdoc = `<!DOCTYPE html><html><body><script>
+(function(){
+  var _c=${codeJson},_l=[];
+  function _s(v){if(v===null)return'null';if(v===undefined)return'undefined';if(typeof v==='object'){try{return JSON.stringify(v,null,2);}catch(e){return String(v);}}return String(v);}
+  console.log=function(){_l.push([].slice.call(arguments).map(_s).join(' '));};
+  console.error=function(){_l.push('ERR: '+[].slice.call(arguments).map(_s).join(' '));};
+  console.warn=function(){_l.push('WARN: '+[].slice.call(arguments).map(_s).join(' '));};
+  try{eval(_c);parent.postMessage({type:'inlineOutput',logs:_l},'*');}
+  catch(e){parent.postMessage({type:'inlineOutput',logs:_l,error:e.message+'\\n'+(e.stack||'').split('\\n').slice(0,3).join('\\n')},'*');}
+})();
+<\/script></body></html>`;
+
+            setTimeout(() => {
+                if (!done) {
+                    window.removeEventListener('message', handler);
+                    out.style.color = '#f48771';
+                    out.textContent = '⏱️ Execution timed out (5s). Check for infinite loops.';
+                }
+            }, 5000);
         }
 
-        function analyzeAnswerQuality(answer, question) {
-            const answerLower = answer.toLowerCase();
-            const answerLength = answer.trim().split(/\s+/).length;
-            let score = 0;
-            let strengths = '';
-            let suggestions = '';
-            let keyPoints = '';
-            let feedback = '';
+        // ==================== PYODIDE (PYTHON IN BROWSER — IFRAME ISOLATED) ====================
+        // Runs Pyodide inside a sandboxed iframe so Monaco's AMD require doesn't conflict.
+        let _pyIframe = null;
+        let _pyodideReady = false;
+        let _pyReadyResolve = null, _pyReadyReject = null;
+        let _pyReadyPromise = null;
+        let _pyRunResolve = null;
+        let _pyRunning = false;
 
-            // Check minimum length
-            if (answerLength < 10) {
-                feedback = 'Your answer is too brief. Try to provide more detail and context.';
-                suggestions = 'Aim for at least 3-4 sentences with specific examples.';
-                return { score: 15, feedback, suggestions, strengths: 'You provided a response, but more elaboration is needed.' };
+        function _ensurePyIframe() {
+            if (_pyIframe) return;
+            _pyReadyPromise = new Promise((res, rej) => { _pyReadyResolve = res; _pyReadyReject = rej; });
+            _pyIframe = document.createElement('iframe');
+            _pyIframe.style.display = 'none';
+            _pyIframe.setAttribute('sandbox', 'allow-scripts');
+            _pyIframe.srcdoc = `<!DOCTYPE html><html><body><script>
+var pyodide = null;
+window.addEventListener('message', function(e) {
+    if (!e.data || e.data.type !== 'runPython' || !pyodide) return;
+    var logs = [];
+    pyodide.setStdout({ batched: function(s){ logs.push(s); } });
+    pyodide.setStderr({ batched: function(s){ logs.push('\\u26a0\\ufe0f ' + s); } });
+    pyodide.runPythonAsync(e.data.code)
+        .then(function(){ parent.postMessage({ type:'pythonOutput', logs:logs }, '*'); })
+        .catch(function(err){ parent.postMessage({ type:'pythonOutput', logs:logs, error:err.message }, '*'); });
+});
+var s = document.createElement('script');
+s.src = 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js';
+s.onload = function() {
+    loadPyodide().then(function(py){ pyodide = py; parent.postMessage({ type:'pyodideReady' }, '*'); })
+                 .catch(function(err){ parent.postMessage({ type:'pyodideError', message:err.message }, '*'); });
+};
+s.onerror = function(){ parent.postMessage({ type:'pyodideError', message:'Failed to fetch Pyodide script' }, '*'); };
+document.head.appendChild(s);
+<\/script></body></html>`;
+            document.body.appendChild(_pyIframe);
+
+            window.addEventListener('message', function(e) {
+                if (!e.data) return;
+                if (e.data.type === 'pyodideReady') {
+                    _pyodideReady = true;
+                    if (_pyReadyResolve) { _pyReadyResolve(); _pyReadyResolve = null; }
+                } else if (e.data.type === 'pyodideError') {
+                    if (_pyReadyReject) { _pyReadyReject(new Error(e.data.message)); _pyReadyReject = null; }
+                } else if (e.data.type === 'pythonOutput') {
+                    _pyRunning = false;
+                    if (_pyRunResolve) { _pyRunResolve(e.data); _pyRunResolve = null; }
+                }
+            });
+        }
+
+        async function _runPython(code, outputArea) {
+            if (_pyRunning) { outputArea.textContent = '⏳ Already running... please wait.'; return; }
+            outputArea.className = 'output-area output-info';
+            outputArea.textContent = _pyodideReady ? '▶ Running...' : '⏳ Loading Python runtime (first run ~10s)...';
+            _ensurePyIframe();
+            try {
+                await _pyReadyPromise;
+            } catch (err) {
+                outputArea.className = 'output-area output-error';
+                outputArea.textContent = '❌ Failed to load Python runtime:\n' + (err.message || err);
+                return;
             }
-
-            // Analyze based on question type
-            if (question && question.includes('design')) {
-                // System Design Question
-                const designKeywords = ['scale', 'database', 'cache', 'load', 'distributed', 'api', 'microservice', 'latency', 'throughput'];
-                const keywordMatches = designKeywords.filter(kw => answerLower.includes(kw)).length;
-                
-                score = Math.min(30 + (keywordMatches * 8), 95);
-                strengths = keywordMatches >= 5 ? 'Comprehensive system design thinking with multiple considerations.' : 'Basic system design approach identified.';
-                suggestions = keywordMatches < 5 ? 'Consider discussing: caching strategies, database optimization, load balancing, and scalability patterns.' : 'Add more specifics about monitoring, failover, and disaster recovery.';
-                keyPoints = designKeywords.filter(kw => answerLower.includes(kw)).map(kw => `<li>Mentioned ${kw}</li>`).join('');
-            } else if (question && question.includes('code') || question.includes('implement')) {
-                // Coding Question
-                const codeKeywords = ['function', 'class', 'method', 'algorithm', 'logic', 'variable', 'loop', 'condition'];
-                const codeMatches = codeKeywords.filter(kw => answerLower.includes(kw)).length;
-                const hasCodeStructure = /[{\[\(]/.test(answer); // Check for code-like syntax
-                
-                score = 20 + (codeMatches * 8) + (hasCodeStructure ? 15 : 0);
-                strengths = hasCodeStructure ? 'Code structure identified with proper syntax.' : 'Logical explanation provided.';
-                suggestions = !hasCodeStructure ? 'Try to provide actual code or pseudocode for better clarity.' : 'Add comments explaining your algorithm.';
-                keyPoints = '<li>Programming concepts identified</li><li>Logic demonstrated</li>';
+            outputArea.textContent = '▶ Running...';
+            _pyRunning = true;
+            const result = await new Promise((resolve) => {
+                const timer = setTimeout(() => {
+                    if (_pyRunResolve) { _pyRunResolve = null; _pyRunning = false; resolve({ error: '⏱️ Timed out (30s). Check for infinite loops.', logs: [] }); }
+                }, 30000);
+                _pyRunResolve = (data) => { clearTimeout(timer); resolve(data); };
+                _pyIframe.contentWindow.postMessage({ type: 'runPython', code: code }, '*');
+            });
+            if (result.error) {
+                outputArea.className = 'output-area output-error';
+                outputArea.textContent = '❌ Python Error:\n' + result.error;
             } else {
-                // Behavioral/General Question  
-                const behavioralKeywords = ['situation', 'task', 'action', 'result', 'learned', 'example', 'specific', 'challenge', 'overcome', 'improved'];
-                const behaviorMatches = behavioralKeywords.filter(kw => answerLower.includes(kw)).length;
-                
-                score = 25 + (behaviorMatches * 8) + (answerLength > 50 ? 10 : 0);
-                strengths = behaviorMatches >= 5 ? 'STAR method applied effectively with clear examples.' : 'General approach with some specific details.';
-                suggestions = behaviorMatches < 5 ? 'Use STAR method: Situation → Task → Action → Result. This makes answers more compelling.' : 'Add more quantifiable results to demonstrate impact.';
-                keyPoints = behavioralKeywords.filter(kw => answerLower.includes(kw)).map(kw => `<li>Included: ${kw}</li>`).join('');
+                outputArea.className = 'output-area';
+                outputArea.textContent = result.logs.length > 0 ? result.logs.join('\n') : '✓ Code ran successfully (no output)';
+            }
+        }
+
+        function runCode() {
+            if (!monacoEditor) return;
+            const lang = document.getElementById('languageSelect').value;
+            const code = monacoEditor.getValue();
+            const outputArea = document.getElementById('outputArea');
+
+            if (lang === 'python') {
+                _runPython(code, outputArea);
+                return;
             }
 
-            return {
-                score: Math.max(15, Math.min(100, score)),
-                feedback,
-                suggestions,
-                strengths,
-                keyPoints: keyPoints || '<li>Response provided and analyzed</li>'
+            if (lang !== 'javascript' && lang !== 'typescript') {
+                const repl = { java: 'onlinegdb.com or replit.com', cpp: 'onlinegdb.com or replit.com' };
+                outputArea.className = 'output-area output-info';
+                outputArea.textContent = `ℹ️  Browser runs JavaScript and Python directly.\n\nFor ${lang}, copy the code and paste it into:\n  • ${repl[lang] || 'replit.com'}\n  • Your local IDE / terminal\n\nClick "⎘ Copy" to copy your code.`;
+                return;
+            }
+
+            outputArea.className = 'output-area output-info';
+            outputArea.textContent = 'Running...';
+
+            let done = false;
+            const messageHandler = function(e) {
+                if (!e.data || e.data.type !== 'codeOutput') return;
+                done = true;
+                window.removeEventListener('message', messageHandler);
+                if (e.data.error) {
+                    outputArea.className = 'output-area output-error';
+                    outputArea.textContent = '❌ Error:\n' + e.data.error;
+                } else {
+                    outputArea.className = 'output-area';
+                    outputArea.textContent = e.data.logs.length > 0
+                        ? e.data.logs.join('\n')
+                        : '✓ Code ran successfully (no console output)';
+                }
             };
+            window.addEventListener('message', messageHandler);
+
+            const codeJson = JSON.stringify(code).replace(/</g, '\\u003C').replace(/>/g, '\\u003E');
+            document.getElementById('codeSandbox').srcdoc = `<!DOCTYPE html><html><body><script>
+(function(){
+    var _c=${codeJson};
+    var _l=[];
+    function _s(v){if(v===null)return'null';if(v===undefined)return'undefined';if(typeof v==='object'){try{return JSON.stringify(v,null,2);}catch(e){return String(v);}}return String(v);}
+    console.log=function(){_l.push(Array.prototype.slice.call(arguments).map(_s).join(' '));};
+    console.error=function(){_l.push('ERROR: '+Array.prototype.slice.call(arguments).map(_s).join(' '));};
+    console.warn=function(){_l.push('WARN: '+Array.prototype.slice.call(arguments).map(_s).join(' '));};
+    try{eval(_c);parent.postMessage({type:'codeOutput',logs:_l},'*');}
+    catch(e){parent.postMessage({type:'codeOutput',logs:_l,error:e.message+'\\n'+(e.stack||'').split('\\n').slice(0,3).join('\\n')},'*');}
+})();
+<\/script></body></html>`;
+
+            setTimeout(() => {
+                if (!done) {
+                    window.removeEventListener('message', messageHandler);
+                    outputArea.className = 'output-area output-error';
+                    outputArea.textContent = '⏱️ Execution timed out (5s). Check for infinite loops.';
+                }
+            }, 5000);
+        }
+
+        function clearOutput() {
+            const out = document.getElementById('outputArea');
+            out.className = 'output-area output-info';
+            out.textContent = '// Click "▶ Run" to execute your JavaScript or Python code...';
         }
     </script>
+    <script>var require = { paths: { 'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs' } };</script>
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+    <script>require(['vs/editor/editor.main'], function() { initMonacoEditor(); });</script>
 </body>
 </html>
